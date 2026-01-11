@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import 'focus-visible';
 import { ThemeProvider } from 'next-themes';
 import { AppProps } from 'next/app';
@@ -41,6 +42,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             <Footer />
           </div>
           <Analytics />
+          <SpeedInsights />
         </div>
       </ThemeProvider>
     </>
