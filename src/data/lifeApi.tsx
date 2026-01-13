@@ -126,7 +126,7 @@ export const Series = [
     link: 'https://www.imdb.com/title/tt1910272/',
   },
   {
-    name: 'Koeno Katachi (A Silent Voice)',
+    name: 'A Silent Voice',
     link: 'https://www.imdb.com/title/tt5323662/',
   },
   {
