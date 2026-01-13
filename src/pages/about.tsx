@@ -8,6 +8,7 @@ import { ExternalLink } from '../components/ExternalLink';
 import { PageTitle } from '../components/PageTitle';
 import { Section } from '../components/Section';
 import { SocialLink } from '../components/SocialLink';
+import { MailIcon } from '../components/icons/MailIcon';
 import {
   AboutExtended,
   Books,
@@ -42,7 +43,7 @@ export default function AboutMe() {
                 src={AvatarImage}
                 alt=""
                 sizes="(min-width: 1024px) 32rem, 20rem"
-                className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+                className="aspect-square rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
               />
             </div>
           </div>
@@ -50,22 +51,28 @@ export default function AboutMe() {
             <PageTitle>Hi, I am Danel Rahmani</PageTitle>
             <div className="mt-6 text-base">{AboutExtended}</div>
             <div className="mt-6 flex items-center gap-6">
-            {SocialMedia.map((socialProfile) => (
-              <SocialLink
-                key={socialProfile.name}
-                aria-label={`Follow on ${socialProfile.name}`}
-                href={socialProfile.link}
-                icon={socialProfile.icon}
-              />
-            ))}
-            <a
-              href="/assets/resume.pdf"
-              download
-              aria-label="Download resume"
-              className="inline-flex items-center rounded-md px-3 py-1 text-sm font-medium text-white bg-primary hover:bg-primary-light dark:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition"
-            >
-              Resume
-            </a>
+               {SocialMedia.map((socialProfile) => (
+               <SocialLink
+               key={socialProfile.name}
+              aria-label={`Follow on ${socialProfile.name}`}
+              href={socialProfile.link}
+              icon={socialProfile.icon}
+               />
+               ))}
+             {/* Email icon */}
+               <SocialLink
+                aria-label="Send me an email"
+               href="mailto:danelrahmani@outlook.com"
+                icon={MailIcon}
+               />
+              <a
+             href="/assets/resume.pdf"
+            download
+            aria-label="Download resume"
+             className="inline-flex items-center rounded-md px-3 py-1 text-sm font-medium text-white bg-primary hover:bg-primary-light dark:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition"
+             >
+            Resume
+              </a>
           </div>
             <Section>
               <Section.Title as="h2">Work</Section.Title>
@@ -89,18 +96,6 @@ export default function AboutMe() {
               </Section.Content>
             </Section>
              <Section>
-              <Section.Title as="h2">Music I recommend</Section.Title>
-              <Section.Content>
-                <ul className="mt-1 list-disc list-inside">
-                  {Music.map((music) => (
-                    <li key={music.name}>
-                      <ExternalLink href={music.link}>{music.name}</ExternalLink>
-                    </li>
-                  ))}
-                </ul>
-              </Section.Content>
-            </Section>
-             <Section>
               <Section.Title as="h2">Series I recommend</Section.Title>
               <Section.Content>
                 <ul className="mt-1 list-disc list-inside">
@@ -112,6 +107,24 @@ export default function AboutMe() {
                 </ul>
               </Section.Content>
             </Section>
+             <Section>
+  <Section.Title as="h2">Music I Like</Section.Title>
+  <Section.Content>
+    <div className="mt-2">
+      <iframe
+        data-testid="embed-iframe"
+        style={{ borderRadius: "12px" }}
+        src="https://open.spotify.com/embed/playlist/1K9MAIPAtNMpoNnGwnk9by?utm_source=generator&theme=0"
+        width="100%"
+        height="352"
+        frameBorder={0}
+        allowFullScreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
+    </div>
+  </Section.Content>
+</Section>
           </div>
         </div>
       </Container>

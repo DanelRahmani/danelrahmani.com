@@ -3,11 +3,11 @@ import { GitHubIcon } from '../components/icons/GitHubIcon';
 import { InstagramIcon } from '../components/icons/InstagramIcon';
 import { XIcon } from '../components/icons/XIcon';
 import { LinkedInIcon } from '../components/icons/LinkedInIcon';
+import { ThreadsIcon } from '../components/icons/ThreadsIcon';
 import MyWebsite from '../images/logos/mywebsite.png';
 import ServerLogo from '../images/logos/server.png';
 import RahmaniLogo from '../images/logos/rahmani.svg';
 import { manual } from 'prismjs';
-
 export const Name = 'Danel Rahmani';
 
 export const About = (
@@ -59,6 +59,7 @@ export const MyPastProjects: Project[] = [
 export const SocialMedia = [
   { name: 'Twitter', link: 'https://twitter.com/DanelRahmani', icon: XIcon },
   { name: 'Instagram', link: 'https://www.instagram.com/danelrahmani/', icon: InstagramIcon },
+  { name: 'Threads', link: 'https://www.threads.net/@danelrahmani', icon: ThreadsIcon },
   { name: 'Github', link: 'https://github.com/danelrahmani', icon: GitHubIcon },
   { name: 'LinkedIn', link: 'https://www.linkedin.com/in/danelrahmani', icon: LinkedInIcon },
 ] as const;
@@ -89,10 +90,11 @@ export const Books = [
 
 export const Music = [
   {
-    name: 'Chopin Ballade No. 1 in G minor, Op. 23',
-    link: 'https://open.spotify.com/track/5Ks5ENUFNQDfaqxjZnCkVJ/',
+    name: 'Your Lie in April',
+    link: 'https://www.imdb.com/title/tt3895150/',
   },
 ] as const;
+
 
 export const Series = [
   {
