@@ -87,3 +87,16 @@ export const Books = [
   },
 ] as const;
 
+export const Music = [
+  {
+    name: 'Chopin Ballade No. 1 in G minor, Op. 23',
+    link: 'https://open.spotify.com/track/5Ks5ENUFNQDfaqxjZnCkVJ/',
+  },
+] as const;
+
+export const Series = [
+  {
+    name: 'Your Lie in April',
+    link: 'https://www.imdb.com/title/tt3895150/',
+  },
+] as const;

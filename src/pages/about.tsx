@@ -12,6 +12,8 @@ import {
   AboutExtended,
   Books,
   SocialMedia,
+  Music,
+  Series,
 } from '../data/lifeApi';
 
 const seoTitle = `About`;
@@ -81,6 +83,30 @@ export default function AboutMe() {
                   {Books.map((book) => (
                     <li key={book.name}>
                       <ExternalLink href={book.link}>{book.name}</ExternalLink>
+                    </li>
+                  ))}
+                </ul>
+              </Section.Content>
+            </Section>
+             <Section>
+              <Section.Title as="h2">Music I recommend</Section.Title>
+              <Section.Content>
+                <ul className="mt-1 list-disc list-inside">
+                  {Music.map((music) => (
+                    <li key={music.name}>
+                      <ExternalLink href={music.link}>{music.name}</ExternalLink>
+                    </li>
+                  ))}
+                </ul>
+              </Section.Content>
+            </Section>
+             <Section>
+              <Section.Title as="h2">Series I recommend</Section.Title>
+              <Section.Content>
+                <ul className="mt-1 list-disc list-inside">
+                  {Series.map((series) => (
+                    <li key={series.name}>
+                      <ExternalLink href={series.link}>{series.name}</ExternalLink>
                     </li>
                   ))}
                 </ul>
