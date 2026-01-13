@@ -82,9 +82,25 @@ export const CompaniesLinks = [
 ] as const;
 
 export const Books = [
+    {
+    name: 'Les Miserables',
+    link: 'https://www.goodreads.com/book/show/24280.Les_Mis_rables/',
+  },
+    {
+    name: '1984',
+    link: 'https://www.goodreads.com/book/show/40961427-1984/',
+  },
   {
     name: 'The Kite Runner',
     link: 'https://www.goodreads.com/book/show/17165596-the-kite-runner/',
+  },
+  {
+    name: 'The Hunger Games',
+    link: 'https://www.goodreads.com/book/show/2767052-the-hunger-games/',
+  },
+  {
+    name: 'The Maze Runner',
+    link: 'https://www.goodreads.com/book/show/6186357-the-maze-runner/',
   },
 ] as const;
 
@@ -100,5 +116,21 @@ export const Series = [
   {
     name: 'Your Lie in April',
     link: 'https://www.imdb.com/title/tt3895150/',
+  },
+  {
+    name: 'Neon Genesis Evangelion',
+    link: 'https://www.imdb.com/title/tt0112159/',
+  },
+  {
+    name: 'Steins;Gate',
+    link: 'https://www.imdb.com/title/tt1910272/',
+  },
+  {
+    name: 'Koeno Katachi (A Silent Voice)',
+    link: 'https://www.imdb.com/title/tt5323662/',
+  },
+  {
+    name: 'Death Note',
+    link: 'https://www.imdb.com/title/tt0877057/',
   },
 ] as const;
