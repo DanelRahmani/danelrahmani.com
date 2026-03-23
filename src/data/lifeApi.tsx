@@ -37,7 +37,7 @@ export const MyCurrentProjects: Project[] = [
     description: 'My personal website on the internet.',
     logo: MyWebsite,
     link: {
-      label: 'github.com',
+      label: 'GitHub Repository',
       href: 'https://github.com/DanelRahmani/website/',
     },
   },
@@ -47,7 +47,7 @@ export const MyCurrentProjects: Project[] = [
     description: 'A tool to learn to Persian Alfabet',
     logo: ServerLogo,
     link: {
-      label: 'github.com',
+      label: 'Alefba',
       href: 'https://alefba.vercel.app',
     },
   },
