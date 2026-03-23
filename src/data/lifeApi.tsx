@@ -41,6 +41,16 @@ export const MyCurrentProjects: Project[] = [
       href: 'https://github.com/DanelRahmani/website/',
     },
   },
+  {
+    title: 'AlefBa',
+    techStack: ['NodeJS','HTML' ,'DNS management'],
+    description: 'A tool to learn to Persian Alfabet',
+    logo: ServerLogo,
+    link: {
+      label: 'github.com',
+      href: 'https://alefba.vercel.app',
+    },
+  },
 ];
 
 export const MyPastProjects: Project[] = [
