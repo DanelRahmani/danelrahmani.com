@@ -2,9 +2,21 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
-type CardProps = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement> & { href?: string }>;
+// ── CardComponent ──────────────────────────────────────────────
+type CardProps<T extends keyof JSX.IntrinsicElements = 'div'> = {
+  as?: T;
+  href?: string;
+  className?: string;
+  children?: React.ReactNode;
+};
 
-const CardComponent = ({ className, children, href, ...props }: CardProps) => {
+const CardComponent = <T extends keyof JSX.IntrinsicElements = 'div'>({
+  as,
+  className,
+  children,
+  href,
+}: CardProps<T>) => {
+  const Tag = (as ?? 'div') as keyof JSX.IntrinsicElements;
   if (href) {
     return (
       <Link href={href} className={clsx('group relative flex flex-col items-start', className)}>
@@ -13,12 +25,13 @@ const CardComponent = ({ className, children, href, ...props }: CardProps) => {
     );
   }
   return (
-    <div className={clsx('group relative flex flex-col items-start', className)} {...props}>
+    <Tag className={clsx('group relative flex flex-col items-start', className)}>
       {children}
-    </div>
+    </Tag>
   );
 };
 
+// ── CardLink ───────────────────────────────────────────────────
 const CardLink = ({ children, href }: React.PropsWithChildren<{ href: string }>) => (
   <>
     <span className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
@@ -29,16 +42,32 @@ const CardLink = ({ children, href }: React.PropsWithChildren<{ href: string }>)
   </>
 );
 
-const CardTitle = ({ children, href }: React.PropsWithChildren<{ href?: string }>) => (
-  <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-    {href ? <CardLink href={href}>{children}</CardLink> : children}
-  </h2>
-);
+// ── CardTitle ──────────────────────────────────────────────────
+type CardTitleProps<T extends keyof JSX.IntrinsicElements = 'h2'> = {
+  as?: T;
+  href?: string;
+  children?: React.ReactNode;
+};
 
+const CardTitle = <T extends keyof JSX.IntrinsicElements = 'h2'>({
+  as,
+  children,
+  href,
+}: CardTitleProps<T>) => {
+  const Tag = (as ?? 'h2') as keyof JSX.IntrinsicElements;
+  return (
+    <Tag className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+      {href ? <CardLink href={href}>{children}</CardLink> : children}
+    </Tag>
+  );
+};
+
+// ── CardDescription ────────────────────────────────────────────
 const CardDescription = ({ children }: React.PropsWithChildren) => (
   <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">{children}</p>
 );
 
+// ── CardCta ────────────────────────────────────────────────────
 const CardCta = ({ children }: React.PropsWithChildren) => (
   <div
     aria-hidden="true"
@@ -49,6 +78,7 @@ const CardCta = ({ children }: React.PropsWithChildren) => (
   </div>
 );
 
+// ── CardEyebrow ────────────────────────────────────────────────
 type CardEyebrowProps<T extends keyof JSX.IntrinsicElements = 'p'> = {
   as?: T;
   dateTime?: string;
