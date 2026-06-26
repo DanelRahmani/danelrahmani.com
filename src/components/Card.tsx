@@ -1,15 +1,22 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
-const CardComponent = ({ children, href }: React.PropsWithChildren<{ href?: string }>) => {
+type CardProps = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement> & { href?: string }>;
+
+const CardComponent = ({ className, children, href, ...props }: CardProps) => {
   if (href) {
     return (
-      <Link href={href} className="group relative flex flex-col items-start">
+      <Link href={href} className={clsx('group relative flex flex-col items-start', className)}>
         {children}
       </Link>
     );
   }
-  return <div className="group relative flex flex-col items-start">{children}</div>;
+  return (
+    <div className={clsx('group relative flex flex-col items-start', className)} {...props}>
+      {children}
+    </div>
+  );
 };
 
 const CardLink = ({ children, href }: React.PropsWithChildren<{ href: string }>) => (
