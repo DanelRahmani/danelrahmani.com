@@ -30,12 +30,17 @@ module.exports = {
         '9xl': ['8rem', { lineHeight: '1' }],
       },
       colors: {
-        // Light mode design tokens
+        // Light mode tokens
         primary: '#4A0E0E',
         'primary-light': '#6B1515',
         'primary-dark': '#2D0808',
         creme: '#FDFBF6',
         'neutral-gray': '#6B7280',
+        // Dark mode tokens
+        'dark-bg': '#0F090E',
+        'dark-accent': '#D43D55',
+        'dark-accent-hover': '#E8566A',
+        'dark-muted': '#9CA3AF',
       },
       borderRadius: {
         '4xl': '2rem',
@@ -46,17 +51,11 @@ module.exports = {
             color: theme('colors.gray.700'),
             a: {
               color: theme('colors.blue.500'),
-              '&:hover': {
-                color: theme('colors.blue.700'),
-              },
+              '&:hover': { color: theme('colors.blue.700') },
               code: { color: theme('colors.blue.400') },
             },
-            'h2,h3,h4': {
-              'scroll-margin-top': spacing[32],
-            },
-            thead: {
-              borderBottomColor: theme('colors.gray.200'),
-            },
+            'h2,h3,h4': { 'scroll-margin-top': spacing[32] },
+            thead: { borderBottomColor: theme('colors.gray.200') },
             code: { color: theme('colors.pink.500') },
             'blockquote p:first-of-type::before': false,
             'blockquote p:last-of-type::after': false,
@@ -64,43 +63,29 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme('colors.gray.200'),
+            color: theme('colors.gray.300'),
             a: {
-              color: theme('colors.blue.400'),
-              '&:hover': {
-                color: theme('colors.blue.600'),
-              },
-              code: { color: theme('colors.blue.400') },
+              color: '#D43D55',
+              '&:hover': { color: '#E8566A' },
+              code: { color: '#D43D55' },
             },
             blockquote: {
-              borderLeftColor: theme('colors.gray.700'),
-              color: theme('colors.gray.300'),
+              borderLeftColor: '#D43D55',
+              color: theme('colors.gray.400'),
             },
             'h2,h3,h4': {
               color: theme('colors.gray.100'),
               'scroll-margin-top': spacing[32],
             },
-            hr: { borderColor: theme('colors.gray.700') },
-            ol: {
-              li: {
-                '&:before': { color: theme('colors.gray.500') },
-              },
-            },
-            ul: {
-              li: {
-                '&:before': { backgroundColor: theme('colors.gray.500') },
-              },
-            },
+            hr: { borderColor: 'rgba(212,61,85,0.2)' },
+            ol: { li: { '&:before': { color: theme('colors.gray.500') } } },
+            ul: { li: { '&:before': { backgroundColor: theme('colors.gray.500') } } },
             strong: { color: theme('colors.gray.100') },
             thead: {
               color: theme('colors.gray.100'),
               borderBottomColor: theme('colors.gray.600'),
             },
-            tbody: {
-              tr: {
-                borderBottomColor: theme('colors.gray.700'),
-              },
-            },
+            tbody: { tr: { borderBottomColor: theme('colors.gray.700') } },
           },
         },
       }),
