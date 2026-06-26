@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
 
-const styles = `inline-flex items-center rounded-full hover:text-primary bg-zinc-100 px-2.5 py-0.5 text-xs leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:text-primary`;
+const styles = `inline-flex items-center rounded-full hover:text-primary dark:hover:text-[#D43D55] bg-zinc-100 px-2.5 py-0.5 text-xs leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-200`;
 
 type Props = (
   | {
