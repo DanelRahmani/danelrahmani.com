@@ -10,8 +10,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
+        sans: ['var(--font-geist-sans)', 'Inter', 'sans-serif'],
         mono: ['var(--font-geist-mono)'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       fontSize: {
         xs: ['0.8125rem', { lineHeight: '1.5rem' }],
@@ -29,9 +30,15 @@ module.exports = {
         '9xl': ['8rem', { lineHeight: '1' }],
       },
       colors: {
-        primary: '#bc0000dd',
-        'primary-light': '#e92c2c',
-        'primary-dark': '#8d0237',
+        // Light mode design tokens
+        primary: '#4A0E0E',
+        'primary-light': '#6B1515',
+        'primary-dark': '#2D0808',
+        creme: '#FDFBF6',
+        'neutral-gray': '#6B7280',
+      },
+      borderRadius: {
+        '4xl': '2rem',
       },
       typography: (theme) => ({
         DEFAULT: {
