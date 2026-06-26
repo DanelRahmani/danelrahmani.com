@@ -20,7 +20,7 @@ export const ProjectCard = ({ project }: { project: Project }) => (
         <Badge key={techStackItem}>{techStackItem}</Badge>
       ))}
     </p>
-    <div className="relative z-10 mt-auto flex text-sm font-medium text-zinc-400 transition group-hover:text-primary dark:text-zinc-200 dark:group-hover:text-[#D43D55]">
+    <div className="relative z-10 mt-auto flex text-sm font-medium text-zinc-400 transition group-hover:text-primary dark:text-zinc-200">
       {project.link ? (
         <p className="flex items-center">
           <LinkIcon className="h-6 w-6 flex-none" />

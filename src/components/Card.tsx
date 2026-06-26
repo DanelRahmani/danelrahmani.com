@@ -1,108 +1,80 @@
 import clsx from 'clsx';
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
 import React from 'react';
 
-// ── CardComponent ──────────────────────────────────────────────
-type CardProps<T extends keyof JSX.IntrinsicElements = 'div'> = {
-  as?: T;
-  href?: string;
-  className?: string;
-  children?: React.ReactNode;
-};
-
-const CardComponent = <T extends keyof JSX.IntrinsicElements = 'div'>({
-  as,
+const CardRoot = ({
+  as: Component = 'div',
   className,
   children,
-  href,
-}: CardProps<T>) => {
-  const Tag = (as ?? 'div') as keyof JSX.IntrinsicElements;
-  if (href) {
-    return (
-      <Link href={href} className={clsx('group relative flex flex-col items-start', className)}>
-        {children}
-      </Link>
-    );
-  }
+}: React.PropsWithChildren<{ as?: React.ElementType; className?: string }>) => {
   return (
-    <Tag className={clsx('group relative flex flex-col items-start', className)}>
+    <Component className={clsx(className, 'group relative flex flex-col items-start')}>
       {children}
-    </Tag>
+    </Component>
   );
 };
 
-// ── CardLink ───────────────────────────────────────────────────
-const CardLink = ({ children, href }: React.PropsWithChildren<{ href: string }>) => (
-  <>
-    <span className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
-    <Link href={href}>
-      <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
-      <span className="relative z-10">{children}</span>
-    </Link>
-  </>
-);
-
-// ── CardTitle ──────────────────────────────────────────────────
-type CardTitleProps<T extends keyof JSX.IntrinsicElements = 'h2'> = {
-  as?: T;
-  href?: string;
-  children?: React.ReactNode;
+const CardLink = ({ children, ...props }: React.PropsWithChildren<LinkProps>) => {
+  return (
+    <>
+      <span className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
+      <Link {...props}>
+        <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+        <span className="relative z-10">{children}</span>
+      </Link>
+    </>
+  );
 };
 
-const CardTitle = <T extends keyof JSX.IntrinsicElements = 'h2'>({
-  as,
-  children,
+const CardTitle = ({
+  as: Component = 'h2',
   href,
-}: CardTitleProps<T>) => {
-  const Tag = (as ?? 'h2') as keyof JSX.IntrinsicElements;
+  children,
+}: React.PropsWithChildren<{ as?: React.ElementType; href?: string }>) => {
   return (
-    <Tag className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-      {href ? <CardLink href={href}>{children}</CardLink> : children}
-    </Tag>
+    <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100 text-balance">
+      {href ? <Card.Link href={href}>{children}</Card.Link> : children}
+    </Component>
   );
 };
 
-// ── CardDescription ────────────────────────────────────────────
-const CardDescription = ({ children }: React.PropsWithChildren) => (
-  <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">{children}</p>
-);
-
-// ── CardCta ────────────────────────────────────────────────────
-const CardCta = ({ children }: React.PropsWithChildren) => (
-  <div
-    aria-hidden="true"
-    className="relative z-10 mt-4 flex items-center text-sm font-medium text-primary dark:text-[#D43D55]"
-  >
-    {children}
-    <span className="ml-1">→</span>
-  </div>
-);
-
-// ── CardEyebrow ────────────────────────────────────────────────
-type CardEyebrowProps<T extends keyof JSX.IntrinsicElements = 'p'> = {
-  as?: T;
-  dateTime?: string;
-  className?: string;
-  decorate?: boolean;
-  children?: React.ReactNode;
+const CardDescription = ({ children }: React.PropsWithChildren) => {
+  return <p className="relative z-10 mt-2 text-sm">{children}</p>;
 };
 
-const CardEyebrow = <T extends keyof JSX.IntrinsicElements = 'p'>({
-  as,
-  children,
-  dateTime,
-  className,
-  decorate,
-}: CardEyebrowProps<T>) => {
-  const Tag = (as ?? 'p') as keyof JSX.IntrinsicElements;
+const CardCta = ({ children }: React.PropsWithChildren) => {
   return (
-    <Tag
+    <div
+      aria-hidden="true"
+      className="relative z-10 mt-4 flex items-center text-sm font-medium text-primary"
+    >
+      {children}
+      <span className="ml-1">→</span>
+    </div>
+  );
+};
+
+const CardEyebrow = ({
+  as: Component = 'p',
+  decorate = false,
+  className,
+  children,
+  ...props
+}: React.PropsWithChildren<
+  {
+    as?: React.ElementType;
+    decorate?: boolean;
+    className?: string;
+  } & React.AllHTMLAttributes<HTMLElement>
+>) => {
+  return (
+    <Component
       className={clsx(
+        className,
         'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
         decorate && 'pl-3.5',
-        className,
       )}
-      {...(dateTime ? { dateTime } : {})}
+      {...props}
     >
       {decorate && (
         <span className="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
@@ -110,11 +82,11 @@ const CardEyebrow = <T extends keyof JSX.IntrinsicElements = 'p'>({
         </span>
       )}
       {children}
-    </Tag>
+    </Component>
   );
 };
 
-export const Card = Object.assign(CardComponent, {
+export const Card = Object.assign(CardRoot, {
   Link: CardLink,
   Title: CardTitle,
   Description: CardDescription,
