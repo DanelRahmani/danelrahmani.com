@@ -49,26 +49,40 @@ const CardCta = ({ children }: React.PropsWithChildren) => (
   </div>
 );
 
-const CardEyebrow = ({
+type CardEyebrowProps<T extends keyof JSX.IntrinsicElements = 'p'> = {
+  as?: T;
+  dateTime?: string;
+  className?: string;
+  decorate?: boolean;
+  children?: React.ReactNode;
+};
+
+const CardEyebrow = <T extends keyof JSX.IntrinsicElements = 'p'>({
+  as,
   children,
   dateTime,
   className,
   decorate,
-}: React.PropsWithChildren<{ dateTime?: string; className?: string; decorate?: boolean }>) => (
-  <p
-    className={`relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 ${
-      decorate ? 'pl-3.5' : ''
-    } ${className ?? ''}`}
-    {...(dateTime ? { dateTime } : {})}
-  >
-    {decorate && (
-      <span className="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
-        <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
-      </span>
-    )}
-    {children}
-  </p>
-);
+}: CardEyebrowProps<T>) => {
+  const Tag = (as ?? 'p') as keyof JSX.IntrinsicElements;
+  return (
+    <Tag
+      className={clsx(
+        'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
+        decorate && 'pl-3.5',
+        className,
+      )}
+      {...(dateTime ? { dateTime } : {})}
+    >
+      {decorate && (
+        <span className="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
+          <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+        </span>
+      )}
+      {children}
+    </Tag>
+  );
+};
 
 export const Card = Object.assign(CardComponent, {
   Link: CardLink,
