@@ -87,7 +87,7 @@ export const SocialMedia = [
 export const Work = [
   {
     company: 'Axiom Digital',
-    title: 'Founder & CEO',
+    title: 'Founder',
     logo: AxiomDigitalLogo,
     start: '2026',
     end: 'Present',
@@ -98,6 +98,21 @@ export const Work = [
     logo: RahmaniLogo,
     start: '2022',
     end: 'Present',
+  },
+] as const;
+
+export const Education = [
+  {
+    school: 'University of Groningen',
+    degree: 'BSc International Business',
+    start: '2023',
+    end: 'Present',
+  },
+  {
+    school: 'Waseda University',
+    degree: 'Exchange Student',
+    start: '2024',
+    end: '2025',
   },
 ] as const;
 

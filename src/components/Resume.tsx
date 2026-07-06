@@ -1,46 +1,78 @@
 import Image from 'next/image';
-import { Work } from '../data/lifeApi';
+import { Work, Education } from '../data/lifeApi';
 import { BriefcaseIcon } from './icons/BriefcaseIcon';
+import { AcademicCapIcon } from './icons/AcademicCapIcon';
 
 export const Resume = () => {
   return (
-    <div className="max-w-[420px] rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {Work.map((role, roleIndex) => (
-          <li key={roleIndex} className="flex gap-4">
-            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 border border-zinc-200 dark:border-zinc-700/40 bg-zinc-50 dark:bg-zinc-800/40">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white overflow-hidden">
-               <Image
-                 src={role.logo}
-                 alt="Logo"
-                 className="h-full w-full object-cover"
-                unoptimized
-    />
-  </div>
-</div>
-            <dl className="flex flex-auto flex-wrap gap-x-2">
-              <dt className="sr-only">Company</dt>
-              <dd className="flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {role.company}
-              </dd>
-              <dt className="sr-only">Date</dt>
-              <dd
-                className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start} until ${role.end}`}
-              >
-                <time dateTime={role.start}>{role.start}</time> <span aria-hidden="true">—</span>{' '}
-                <time dateTime={role.end}>{role.end}</time>
-              </dd>
-              <dt className="sr-only">Role</dt>
-              <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400">{role.title}</dd>
-            </dl>
-          </li>
-        ))}
-      </ol>
+    <div className="max-w-[420px] space-y-6">
+      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+          <BriefcaseIcon className="h-6 w-6 flex-none" />
+          <span className="ml-3">Work</span>
+        </h2>
+        <ol className="mt-6 space-y-4">
+          {Work.map((role, roleIndex) => (
+            <li key={roleIndex} className="flex gap-4">
+              <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 border border-zinc-200 dark:border-zinc-700/40 bg-zinc-50 dark:bg-zinc-800/40">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white overflow-hidden">
+                  <Image
+                    src={role.logo}
+                    alt="Logo"
+                    className="h-full w-full object-cover"
+                    unoptimized
+                  />
+                </div>
+              </div>
+              <dl className="flex flex-auto flex-wrap gap-x-2">
+                <dt className="sr-only">Company</dt>
+                <dd className="flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  {role.company}
+                </dd>
+                <dt className="sr-only">Date</dt>
+                <dd
+                  className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  aria-label={`${role.start} until ${role.end}`}
+                >
+                  <time dateTime={role.start}>{role.start}</time> <span aria-hidden="true">—</span>{' '}
+                  <time dateTime={role.end}>{role.end}</time>
+                </dd>
+                <dt className="sr-only">Role</dt>
+                <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400">{role.title}</dd>
+              </dl>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+          <AcademicCapIcon className="h-6 w-6 flex-none" />
+          <span className="ml-3">Education</span>
+        </h2>
+        <ol className="mt-6 space-y-4">
+          {Education.map((entry, index) => (
+            <li key={index} className="flex gap-4">
+              <dl className="flex flex-auto flex-wrap gap-x-2">
+                <dt className="sr-only">School</dt>
+                <dd className="flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  {entry.school}
+                </dd>
+                <dt className="sr-only">Date</dt>
+                <dd
+                  className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  aria-label={`${entry.start} until ${entry.end}`}
+                >
+                  <time dateTime={entry.start}>{entry.start}</time> <span aria-hidden="true">—</span>{' '}
+                  <time dateTime={entry.end}>{entry.end}</time>
+                </dd>
+                <dt className="sr-only">Degree</dt>
+                <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400">{entry.degree}</dd>
+              </dl>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 };
