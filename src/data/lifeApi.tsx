@@ -38,8 +38,8 @@ export const MyCurrentProjects: Project[] = [
     description: 'My own digital agency focused on AI integration and digital transformation for businesses.',
     logo: AxiomDigitalLogo,
     link: {
-      label: 'axiom-digital.nl',
-      href: 'https://axiom-digital.nl',
+      label: 'axiomdigital.nl',
+      href: 'https://axiomdigital.nl',
     },
   },
   {
@@ -104,7 +104,7 @@ export const Work = [
 export const CompaniesLinks = [
   {
     name: 'Axiom Digital',
-    link: 'https://axiom-digital.nl',
+    link: 'https://axiomdigital.nl',
   },
   {
     name: 'Rahmani\'s Gordijn Kledingatelier',
