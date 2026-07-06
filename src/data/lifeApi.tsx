@@ -89,14 +89,14 @@ export const Work = [
     company: 'Axiom Digital',
     title: 'Founder',
     logo: AxiomDigitalLogo,
-    start: '2026',
+    start: 'Jul 2026',
     end: 'Present',
   },
   {
-    company: 'Rahmani\'s Gordijn Kledingatelier',
-    title: 'General Employee & Tailor',
+    company: "Rahmani's Gordijn Kledingatelier",
+    title: 'Employee',
     logo: RahmaniLogo,
-    start: '2022',
+    start: 'Sep 2020',
     end: 'Present',
   },
 ] as const;
@@ -104,15 +104,21 @@ export const Work = [
 export const Education = [
   {
     school: 'University of Groningen',
-    degree: 'BSc International Business',
-    start: '2023',
-    end: 'Present',
+    degree: 'Honours College',
+    start: 'Apr 2025',
+    end: 'Jul 2027',
   },
   {
-    school: 'Waseda University',
-    degree: 'Exchange Student',
+    school: 'University of Groningen',
+    degree: 'BSc International Business',
     start: '2024',
-    end: '2025',
+    end: '2027',
+  },
+  {
+    school: 'Rsg De Borgen',
+    degree: 'VWO, E&M Profiel',
+    start: 'Sep 2018',
+    end: 'Jul 2024',
   },
 ] as const;
 
@@ -122,7 +128,7 @@ export const CompaniesLinks = [
     link: 'https://axiomdigital.nl',
   },
   {
-    name: 'Rahmani\'s Gordijn Kledingatelier',
+    name: "Rahmani's Gordijn Kledingatelier",
     link: 'https://top-atelier.com/',
   },
 ] as const;
