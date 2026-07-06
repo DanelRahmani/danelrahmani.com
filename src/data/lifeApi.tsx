@@ -6,6 +6,7 @@ import { LinkedInIcon } from '../components/icons/LinkedInIcon';
 import MyWebsite from '../images/logos/mywebsite.png';
 import ServerLogo from '../images/logos/server.png';
 import RahmaniLogo from '../images/logos/rahmani.svg';
+import AxiomDigitalLogo from '../images/logos/axiom-digital-logo.png';
 import { manual } from 'prismjs';
 
 export const Name = 'Danel Rahmani';
@@ -31,6 +32,16 @@ export type Project = {
 };
 
 export const MyCurrentProjects: Project[] = [
+  {
+    title: 'Axiom Digital',
+    techStack: ['Business', 'AI', 'Digital Transformation', 'Consulting'],
+    description: 'My own digital agency focused on AI integration and digital transformation for businesses.',
+    logo: AxiomDigitalLogo,
+    link: {
+      label: 'axiom-digital.nl',
+      href: 'https://axiom-digital.nl',
+    },
+  },
   {
     title: 'My personal website',
     techStack: ['NodeJS', 'React', 'TypeScript','Notion','DNS management'],
@@ -75,6 +86,13 @@ export const SocialMedia = [
 
 export const Work = [
   {
+    company: 'Axiom Digital',
+    title: 'Founder & CEO',
+    logo: AxiomDigitalLogo,
+    start: '2026',
+    end: 'Present',
+  },
+  {
     company: 'Rahmani\'s Gordijn Kledingatelier',
     title: 'General Employee & Tailor',
     logo: RahmaniLogo,
@@ -84,6 +102,10 @@ export const Work = [
 ] as const;
 
 export const CompaniesLinks = [
+  {
+    name: 'Axiom Digital',
+    link: 'https://axiom-digital.nl',
+  },
   {
     name: 'Rahmani\'s Gordijn Kledingatelier',
     link: 'https://top-atelier.com/',
@@ -96,4 +118,3 @@ export const Books = [
     link: 'https://www.goodreads.com/book/show/17165596-the-kite-runner/',
   },
 ] as const;
-
