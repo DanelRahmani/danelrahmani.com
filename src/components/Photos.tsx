@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { travelImages } from '../images/travel';
+import { homeImages, travelImages } from '../images/travel';
 
 const ChevronIcon = ({ direction }: { direction: 'left' | 'right' }) => (
   <svg
@@ -98,10 +99,17 @@ const ScrollButton = ({
   </button>
 );
 
+// How many times someone has to page right before the link to the full set appears.
+const CLICKS_BEFORE_SEE_MORE = 2;
+
 export const Photos = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [rightClicks, setRightClicks] = useState(0);
+
+  const photos = homeImages;
+  const showSeeMore = rightClicks >= CLICKS_BEFORE_SEE_MORE;
 
   const updateScrollState = useCallback(() => {
     const el = scrollerRef.current;
@@ -126,9 +134,17 @@ export const Photos = () => {
     };
   }, [updateScrollState]);
 
+  // Revealing the "see more" tile widens the content but not the scroller itself, so the
+  // ResizeObserver above never fires for it. Recompute, or the right arrow stays disabled.
+  useEffect(() => {
+    updateScrollState();
+  }, [showSeeMore, updateScrollState]);
+
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollerRef.current;
     if (!el) return;
+
+    if (direction === 'right') setRightClicks((count) => count + 1);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     // Advance by a viewport of photos, leaving one card visible for continuity.
@@ -147,7 +163,7 @@ export const Photos = () => {
         onScroll={updateScrollState}
         className="hide-scrollbar -my-4 flex snap-x snap-mandatory gap-8 overflow-x-auto overflow-y-hidden py-4 px-8"
       >
-        {travelImages.map((travelImage, index) => (
+        {photos.map((travelImage, index) => (
           <Photo
             key={travelImage.img.src}
             img={travelImage.img}
@@ -156,6 +172,29 @@ export const Photos = () => {
             idx={index}
           />
         ))}
+
+        <AnimatePresence>
+          {showSeeMore && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1, transition: { duration: 0.25 } }}
+              exit={{ opacity: 0 }}
+              className="relative aspect-[9/10] w-44 flex-none snap-start"
+            >
+              <Link
+                href="/images"
+                className="group flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-zinc-300 text-center transition hover:border-primary dark:border-zinc-700 dark:hover:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <span className="font-mono text-xs font-bold text-zinc-600 transition group-hover:text-primary dark:text-zinc-300">
+                  See more
+                </span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                  All {travelImages.length} photos
+                </span>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 sm:px-4">
