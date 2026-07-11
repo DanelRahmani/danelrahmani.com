@@ -62,7 +62,9 @@ const Photo = ({
             exit={{ opacity: 0 }}
             className="absolute inset-0 w-full bg-gradient-to-t from-black/75 via-black/0 flex items-end"
           >
-            <h3 className="px-3 py-2 font-mono text-xs font-bold">{title}</h3>
+            {/* The overlay is dark in both themes, so the caption is always white
+                rather than inheriting the body colour. */}
+            <h3 className="px-3 py-2 font-mono text-xs font-bold text-white">{title}</h3>
           </motion.div>
         )}
       </AnimatePresence>

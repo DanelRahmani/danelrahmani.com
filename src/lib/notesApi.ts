@@ -91,6 +91,29 @@ const CompareFunctionLookup = {
   desc: compareDesc,
 };
 
+/**
+ * The cover lives in the database's `cover` files property, not on the Notion page
+ * itself, and may be either an upload or a pasted link. Falls back to a page-level
+ * cover so both ways of setting one keep working.
+ *
+ * Note: uploaded files come back as signed S3 URLs that expire after about an hour.
+ * Pages revalidate often enough to keep them fresh; a pasted external link never expires.
+ */
+const resolveCoverImage = (page: any): string | null => {
+  const property = page.properties?.cover;
+
+  if (property?.type === 'files') {
+    const file = property.files?.[0];
+    if (file?.type === 'file') return file.file.url;
+    if (file?.type === 'external') return file.external.url;
+  }
+
+  if (page.cover?.type === 'external') return page.cover.external.url;
+  if (page.cover?.type === 'file') return page.cover.file.url;
+
+  return null;
+};
+
 class NotesApi {
   constructor(
     private readonly notion: Client,
@@ -147,7 +170,7 @@ class NotesApi {
           id: page.id,
           createdAt: page.created_time,
           lastEditedAt: page.last_edited_time,
-          coverImage: page.cover?.type === 'external' ? page.cover.external.url : null,
+          coverImage: resolveCoverImage(page),
           tags:
             'multi_select' in page.properties.hashtags
               ? page.properties.hashtags.multi_select.map((tag) => tag.name)

@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function Note({
-  note: { title, description, createdAt, slug },
+  note: { title, description, createdAt, slug, coverImage },
   noteContent,
   previousPathname,
 }: Props & { previousPathname: string }) {
@@ -45,7 +45,7 @@ export default function Note({
         description={description}
       />
       <NoteLayout
-        meta={{ title, description, date: createdAt }}
+        meta={{ title, description, date: createdAt, coverImage }}
         previousPathname={previousPathname}
       >
         <div className="pb-32">

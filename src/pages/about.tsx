@@ -110,24 +110,16 @@ export default function AboutMe() {
                 </ul>
               </Section.Content>
             </Section>
-             <Section>
-  <Section.Title as="h2">Music I Like</Section.Title>
-  <Section.Content>
-    <div className="mt-2">
-      <iframe
-        data-testid="embed-iframe"
-        style={{ borderRadius: "12px" }}
-        src="https://open.spotify.com/embed/playlist/1K9MAIPAtNMpoNnGwnk9by?utm_source=generator&theme=0"
-        width="100%"
-        height="352"
-        frameBorder={0}
-        allowFullScreen
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      />
-    </div>
-  </Section.Content>
-</Section>
+            <Section>
+              <Section.Title as="h2">Music I Like</Section.Title>
+              <Section.Content>
+                A playlist of what I&apos;ve had on lately, over on{' '}
+                <ExternalLink href="https://open.spotify.com/playlist/1K9MAIPAtNMpoNnGwnk9by">
+                  Spotify
+                </ExternalLink>
+                .
+              </Section.Content>
+            </Section>
           </div>
         </div>
       </Container>

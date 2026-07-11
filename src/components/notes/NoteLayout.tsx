@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -13,6 +14,7 @@ interface Props {
     title: string;
     description: string;
     date: string;
+    coverImage?: string | null;
   };
   previousPathname?: string;
 }
@@ -47,6 +49,18 @@ export const NoteLayout = ({ children, meta, previousPathname }: Props) => {
                 <span className="ml-3">{formatDate(meta.date)}</span>
               </time>
             </header>
+            {meta.coverImage && (
+              <div className="relative mt-8 aspect-[2/1] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
+                <Image
+                  src={meta.coverImage}
+                  alt=""
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 48rem, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
             <Prose className="mt-8">{children}</Prose>
           </article>
         </div>
