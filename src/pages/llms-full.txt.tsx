@@ -40,17 +40,22 @@ ${markdown}`;
 
 > Personal site of Danel Rahmani, an International Business student at the University of Groningen and the founder of Axiom Digital. This file contains the full text of the site's content.
 
-Danel Rahmani is a student at the University of Groningen with a wide range of interests. This is his personal website, featuring his resume, his thoughts, and projects he has worked on. He can be reached at danelrahmani@outlook.com.
+Danel Rahmani is the founder of Axiom Digital (https://axiomdigital.nl), a digital agency focused on AI integration and digital transformation for businesses. He studies International Business at the University of Groningen, where he is part of the Honours College. He can be reached at danelrahmani@outlook.com.
 
-From September 2026 to February 2027 he is on exchange at the School of Political Science and Economics at Waseda University in Tokyo. He also runs Axiom Digital (https://axiomdigital.nl), building websites and helping smaller businesses with the digital side of their work.
+From September 2026 to February 2027 he is on exchange at the School of Political Science and Economics at Waseda University in Tokyo. Since 2020 he has also worked in his family's business, Rahmani's Gordijn Kledingatelier.
 
 # Work
 
-${Work.map((role) => `- ${role.title}, ${role.company} (${role.start} – ${role.end})`).join('\n')}
+${Work.map((role) => `- ${role.title}, ${role.company} (${role.start} - ${role.end})`).join('\n')}
 
 # Education
 
-${Education.map((entry) => `- ${entry.degree}, ${entry.school} (${entry.start} – ${entry.end})`).join('\n')}
+${Education.map(
+  (entry) =>
+    `- ${entry.degree}, ${entry.school} (${entry.start} - ${entry.end})${
+      entry.distinction ? `, ${entry.distinction}` : ''
+    }`,
+).join('\n')}
 
 # Recommendations
 

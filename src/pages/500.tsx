@@ -8,13 +8,16 @@ export default function ServerError() {
   return (
     <SimpleLayout>
       <div className="text-center">
-        <p className="text-base font-semibold text-primary">500</p>
+        <p className="font-mono text-base font-semibold text-primary dark:text-dark-accent">500</p>
         <PageTitle>Internal Server Error</PageTitle>
-        <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+        <p className="mt-4 text-base text-stone-600 dark:text-zinc-400">
           Sorry, something went wrong on our end.
         </p>
         <div className="mt-6">
-          <Link href="/" className="text-base font-medium hover:text-primary">
+          <Link
+            href="/"
+            className="link-thread text-base font-medium text-primary dark:text-dark-accent"
+          >
             Go back home
           </Link>
         </div>

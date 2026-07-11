@@ -1,5 +1,6 @@
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
@@ -16,7 +17,10 @@ export const NavigationItems = [
 ] as const;
 
 export const NavLink = ({ href, children }: React.PropsWithChildren<{ href: string }>) => (
-  <Link href={href} className="transition hover:text-primary dark:hover:text-[#D43D55]">
+  <Link
+    href={href}
+    className="link-thread transition hover:text-primary dark:hover:text-dark-accent"
+  >
     {children}
   </Link>
 );
@@ -36,7 +40,16 @@ const NavItem = ({ href, children }: React.PropsWithChildren<{ href: string }>) 
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 dark:from-[#D43D55]/20 dark:via-[#D43D55] dark:to-[#D43D55]/20" />
+          // One shared thread slides between nav items on route change
+          // (framer shared-layout FLIP via layoutId). The dashed rule is the
+          // site's basting-stitch motif doing navigation duty.
+          <motion.span
+            layoutId="nav-thread"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            aria-hidden="true"
+            className="seam absolute inset-x-1 -bottom-px h-0"
+            style={{ borderTopColor: 'currentColor' }}
+          />
         )}
       </Link>
     </li>

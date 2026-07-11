@@ -31,7 +31,7 @@ export default function Tag({ tag, relatedNotes }: Props) {
         }}
       />
       <PageLayout title="Tags" intro={`All the articles from #${tag}`}>
-        <div className="mt-24 md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+        <div className="mt-24 md:seam-l md:pl-6">
           <div className="flex max-w-3xl flex-col space-y-16">
             {relatedNotes.map((note) => (
               <NotePreview key={note.slug} note={note} />

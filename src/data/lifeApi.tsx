@@ -8,17 +8,29 @@ import MyWebsite from '../images/logos/mywebsite.png';
 import ServerLogo from '../images/logos/server.png';
 import RahmaniLogo from '../images/logos/rahmani.svg';
 import AxiomDigitalLogo from '../images/logos/axiom-digital-logo.png';
-import { manual } from 'prismjs';
+
 export const Name = 'Danel Rahmani';
 
 export const About = (
   <>
-    {` This is my personal website, featuring my resume, my thoughts, and projects I've worked on.
-    If you want to get in touch`}{' '}
-    <ExternalLink href="mailto:danelrahmani@outlook.com">send me an email.</ExternalLink>
+    I&apos;m the founder of{' '}
+    <ExternalLink href="https://axiomdigital.nl">Axiom Digital</ExternalLink>, a digital agency
+    helping businesses put AI and digital transformation to work. By day I study International
+    Business in Groningen; this September I&apos;m off to Waseda, Tokyo.
   </>
 );
-export const AboutExtended = `I am a student at the University of Groningen, and have a great many interests.`;
+
+export const AboutExtended = `I run Axiom Digital, study International Business at the University of Groningen, and grew up in my family's tailoring atelier. This site is where those threads meet: my work, my writing, and the photos I take along the way.`;
+
+export const AxiomDigital = {
+  name: 'Axiom Digital',
+  tagline: 'AI integration and digital transformation for businesses.',
+  description:
+    'My digital agency. I help businesses figure out where AI and automation actually pay off, then build and deliver it.',
+  href: 'https://axiomdigital.nl',
+  label: 'axiomdigital.nl',
+  logo: AxiomDigitalLogo,
+} as const;
 
 export type Project = {
   title: string;
@@ -53,13 +65,13 @@ export const MyCurrentProjects: Project[] = [
     },
   },
   {
-    title: 'AlefBa',
-    techStack: ['NodeJS','HTML' ,'DNS management'],
-    description: 'A tool to learn to Persian Alfabet',
+    title: 'AlefBe',
+    techStack: ['NodeJS', 'HTML', 'DNS management'],
+    description: 'A tool for learning the Persian alphabet.',
     logo: ServerLogo,
     link: {
-      label: 'Alefba',
-      href: 'https://alefba.vercel.app',
+      label: 'alefbe.study',
+      href: 'https://www.alefbe.study/',
     },
   },
 ];
@@ -102,7 +114,15 @@ export const Work = [
   },
 ] as const;
 
-export const Education = [
+type EducationEntry = {
+  school: string;
+  degree: string;
+  start: string;
+  end: string;
+  distinction?: string;
+};
+
+export const Education: readonly EducationEntry[] = [
   {
     school: 'Waseda University',
     degree: 'Exchange, School of Political Science and Economics',
@@ -120,12 +140,14 @@ export const Education = [
     degree: 'BSc International Business',
     start: '2024',
     end: '2027',
+    distinction: 'GPA: 9.25 (Year 1) · 9.00 (Year 2)',
   },
   {
     school: 'Rsg De Borgen',
     degree: 'VWO, E&M Profiel',
     start: 'Sep 2018',
     end: 'Jul 2024',
+    distinction: 'Graduated Cum Laude',
   },
 ] as const;
 

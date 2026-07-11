@@ -21,13 +21,18 @@ const StaticBadge = ({ className, children }: React.PropsWithChildren<{ classNam
 interface Props {
   note: Note;
   dense?: boolean;
+  /** Stagger offset in seconds, for lists that cascade in one by one. */
+  delay?: number;
 }
 
-export const NotePreview = ({ note, dense }: Props) => {
+export const NotePreview = ({ note, dense, delay = 0 }: Props) => {
   return (
     <motion.div
       initial={ANIMATION_FROM_PROPS}
-      whileInView={ANIMATION_TO_PROPS}
+      whileInView={{
+        ...ANIMATION_TO_PROPS,
+        transition: { ...ANIMATION_TO_PROPS.transition, delay },
+      }}
       viewport={{ once: true }}
     >
       <article className="md:grid md:grid-cols-4 md:items-baseline">

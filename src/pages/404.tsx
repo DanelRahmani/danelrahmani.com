@@ -8,13 +8,16 @@ export default function NotFound() {
   return (
     <SimpleLayout>
       <div className="text-center">
-        <p className="text-base font-semibold text-primary">404</p>
+        <p className="font-mono text-base font-semibold text-primary dark:text-dark-accent">404</p>
         <PageTitle>Page not found.</PageTitle>
-        <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+        <p className="mt-4 text-base text-stone-600 dark:text-zinc-400">
           Sorry, we couldn’t find the page you’re looking for.
         </p>
         <div className="mt-6">
-          <Link href="/" className="text-base font-medium hover:text-primary">
+          <Link
+            href="/"
+            className="link-thread text-base font-medium text-primary dark:text-dark-accent"
+          >
             Go back home
           </Link>
         </div>

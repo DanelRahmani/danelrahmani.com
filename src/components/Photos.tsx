@@ -38,9 +38,20 @@ const Photo = ({
   return (
     <motion.div
       key={img.src}
-      initial={{ scale: 1, opacity: 0 }}
-      whileHover={{ scale: 1.1, rotate: 0, transition: { duration: 0.2 } }}
-      whileInView={{ opacity: 1, transition: { delay: idx / 100 } }}
+      initial={{ opacity: 0, y: 20, scale: 0.97 }}
+      whileHover={{ scale: 1.03, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        // The photos visible on load cascade in one by one; anything paged
+        // into view later appears promptly instead of joining the queue.
+        transition: {
+          duration: 0.6,
+          delay: idx < 7 ? idx * 0.09 : 0.05,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      }}
       viewport={{ once: true }}
       onHoverStart={() => setIsVisible(true)}
       onHoverEnd={() => setIsVisible(false)}

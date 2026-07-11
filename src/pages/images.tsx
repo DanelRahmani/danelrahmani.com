@@ -36,6 +36,14 @@ const overlayButton =
 const pill =
   'rounded-full bg-black/60 px-3 py-1 font-mono text-xs font-medium text-white shadow-lg ring-1 ring-white/20 backdrop-blur';
 
+// Photos slide in from the side the visitor is heading toward; the exit
+// drifts the opposite way and stays subtler than the enter.
+const photoVariants = {
+  enter: (direction: number) => ({ opacity: 0, x: direction * 24, scale: 0.985 }),
+  center: { opacity: 1, x: 0, scale: 1 },
+  exit: (direction: number) => ({ opacity: 0, x: direction * -12 }),
+};
+
 const Lightbox = ({
   index,
   onClose,
@@ -46,14 +54,21 @@ const Lightbox = ({
   onNavigate: (next: number) => void;
 }) => {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const [direction, setDirection] = useState(0);
   const photo = travelImages[index];
 
   const goPrevious = useCallback(() => {
-    if (index > 0) onNavigate(index - 1);
+    if (index > 0) {
+      setDirection(-1);
+      onNavigate(index - 1);
+    }
   }, [index, onNavigate]);
 
   const goNext = useCallback(() => {
-    if (index < travelImages.length - 1) onNavigate(index + 1);
+    if (index < travelImages.length - 1) {
+      setDirection(1);
+      onNavigate(index + 1);
+    }
   }, [index, onNavigate]);
 
   useEffect(() => {
@@ -79,7 +94,7 @@ const Lightbox = ({
     <motion.div
       role="dialog"
       aria-modal="true"
-      aria-label={`${photo.title} — photo ${index + 1} of ${travelImages.length}`}
+      aria-label={`${photo.title}, photo ${index + 1} of ${travelImages.length}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -118,14 +133,26 @@ const Lightbox = ({
         </button>
 
         <figure className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3">
-          <Image
-            key={photo.img.src}
-            src={photo.img}
-            alt={photo.alt}
-            placeholder="blur"
-            sizes="90vw"
-            className="max-h-[75vh] w-auto max-w-full rounded-lg object-contain"
-          />
+          <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+            <motion.div
+              key={photo.img.src}
+              variants={photoVariants}
+              custom={direction}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="flex min-h-0 max-w-full items-center justify-center"
+            >
+              <Image
+                src={photo.img}
+                alt={photo.alt}
+                placeholder="blur"
+                sizes="90vw"
+                className="max-h-[75vh] w-auto max-w-full rounded-lg object-contain"
+              />
+            </motion.div>
+          </AnimatePresence>
           <figcaption className={pill}>{photo.title}</figcaption>
         </figure>
 
@@ -160,7 +187,7 @@ export default function Images() {
       />
       <PageLayout
         title="Images"
-        intro="Photos I have taken along the way — Tokyo, Kyoto and Osaka, CERN, Geneva and Bern, and the occasional cat. Click any of them to see it larger."
+        intro="Photos I have taken along the way: Tokyo, Kyoto and Osaka, CERN, Geneva and Bern, and the occasional cat. Click any of them to see it larger."
       >
         {/* A columns masonry: every photo keeps its own aspect ratio, so the wide shots and the
             upright ones both appear whole rather than cropped to a common shape. */}

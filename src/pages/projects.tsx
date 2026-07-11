@@ -29,8 +29,12 @@ export default function Creating() {
         title="Things I've made during my life"
         intro="A list of projects I've worked on, I'm working on and I will work on."
       >
-        <h2 className="text-2xl font-bold tracking-tight">Now</h2>
-        <p className="mt-2 text-base">Projects I currently work on.</p>
+        <h2 className="font-serif text-2xl font-semibold tracking-tight text-stone-900 dark:text-zinc-100">
+          Now
+        </h2>
+        <p className="mt-2 text-base text-stone-600 dark:text-zinc-400">
+          Projects I currently work on.
+        </p>
         <ul
           role="list"
           className="mt-12 grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3"
@@ -47,9 +51,11 @@ export default function Creating() {
           ))}
         </ul>
 
-        <h2 className="mt-24 text-2xl font-bold tracking-tight">Past</h2>
-        <p className="mt-2 text-base">
-          My Past Projects
+        <h2 className="mt-24 font-serif text-2xl font-semibold tracking-tight text-stone-900 dark:text-zinc-100">
+          Past
+        </h2>
+        <p className="mt-2 text-base text-stone-600 dark:text-zinc-400">
+          Projects I have finished or retired.
         </p>
         <ul
           role="list"

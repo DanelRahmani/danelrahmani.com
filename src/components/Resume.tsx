@@ -1,7 +1,18 @@
+import { motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
 import { Work, Education } from '../data/lifeApi';
 import { BriefcaseIcon } from './icons/BriefcaseIcon';
 import { AcademicCapIcon } from './icons/AcademicCapIcon';
+
+// The two ledger cards materialize in sequence as they scroll into view:
+// Work first, Education a beat later. Once, softly, and the MotionConfig
+// wrapper strips the rise under reduced motion.
+const ledgerEnter = (delay: number) => ({
+  initial: { opacity: 0, y: 16, filter: 'blur(4px)' },
+  whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
+});
 
 // The image optimizer rejects SVG unless dangerouslyAllowSVG is set, so vector
 // logos are passed through untouched while raster logos get resized.
@@ -11,7 +22,10 @@ const isSvg = (logo: StaticImageData | string) =>
 export const Resume = () => {
   return (
     <div className="max-w-[420px] space-y-6">
-      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <motion.div
+        {...ledgerEnter(0)}
+        className="card-shadow panel rounded-2xl border border-primary/10 p-6 dark:border-zinc-700/40"
+      >
         <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           <BriefcaseIcon className="h-6 w-6 flex-none" />
           <span className="ml-3">Work</span>
@@ -30,17 +44,17 @@ export const Resume = () => {
                   />
                 </div>
               </div>
-              <dl className="flex flex-auto flex-wrap gap-x-2">
+              <dl className="flex flex-auto flex-wrap items-baseline gap-x-2">
                 <dt className="sr-only">Company</dt>
-                <dd className="flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <dd className="min-w-0 flex-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                   {role.company}
                 </dd>
                 <dt className="sr-only">Date</dt>
                 <dd
-                  className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  className="ml-auto flex-none whitespace-nowrap font-mono text-xs tabular-nums text-stone-500 dark:text-zinc-400"
                   aria-label={`${role.start} until ${role.end}`}
                 >
-                  <time dateTime={role.start}>{role.start}</time> <span aria-hidden="true">—</span>{' '}
+                  <time dateTime={role.start}>{role.start}</time> <span aria-hidden="true">-</span>{' '}
                   <time dateTime={role.end}>{role.end}</time>
                 </dd>
                 <dt className="sr-only">Role</dt>
@@ -49,9 +63,12 @@ export const Resume = () => {
             </li>
           ))}
         </ol>
-      </div>
+      </motion.div>
 
-      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <motion.div
+        {...ledgerEnter(0.12)}
+        className="card-shadow panel rounded-2xl border border-primary/10 p-6 dark:border-zinc-700/40"
+      >
         <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           <AcademicCapIcon className="h-6 w-6 flex-none" />
           <span className="ml-3">Education</span>
@@ -59,26 +76,34 @@ export const Resume = () => {
         <ol className="mt-6 space-y-4">
           {Education.map((entry, index) => (
             <li key={index} className="flex gap-4">
-              <dl className="flex flex-auto flex-wrap gap-x-2">
+              <dl className="flex flex-auto flex-wrap items-baseline gap-x-2">
                 <dt className="sr-only">School</dt>
-                <dd className="flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <dd className="min-w-0 flex-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                   {entry.school}
                 </dd>
                 <dt className="sr-only">Date</dt>
                 <dd
-                  className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  className="ml-auto flex-none whitespace-nowrap font-mono text-xs tabular-nums text-stone-500 dark:text-zinc-400"
                   aria-label={`${entry.start} until ${entry.end}`}
                 >
-                  <time dateTime={entry.start}>{entry.start}</time> <span aria-hidden="true">—</span>{' '}
+                  <time dateTime={entry.start}>{entry.start}</time> <span aria-hidden="true">-</span>{' '}
                   <time dateTime={entry.end}>{entry.end}</time>
                 </dd>
                 <dt className="sr-only">Degree</dt>
                 <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400">{entry.degree}</dd>
+                {entry.distinction && (
+                  <>
+                    <dt className="sr-only">Distinction</dt>
+                    <dd className="w-full font-mono text-xs tabular-nums text-primary/80 dark:text-dark-accent/90">
+                      {entry.distinction}
+                    </dd>
+                  </>
+                )}
               </dl>
             </li>
           ))}
         </ol>
-      </div>
+      </motion.div>
     </div>
   );
 };

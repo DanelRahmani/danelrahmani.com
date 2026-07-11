@@ -6,7 +6,7 @@ export const PageTitle = ({ children, className }: PropsWithChildren<{ className
     <h1
       className={clsx(
         className,
-        'text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 text-balance',
+        'font-serif text-4xl font-semibold tracking-tight text-stone-900 dark:text-zinc-100 text-balance sm:text-5xl',
       )}
     >
       {children}

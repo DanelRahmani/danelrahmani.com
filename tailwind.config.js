@@ -11,8 +11,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'Inter', 'sans-serif'],
-        mono: ['var(--font-geist-mono)'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
+        serif: ['var(--font-display)', 'Didot', 'Bodoni MT', 'Georgia', 'serif'],
       },
       fontSize: {
         xs: ['0.8125rem', { lineHeight: '1.5rem' }],

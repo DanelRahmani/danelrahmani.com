@@ -3,9 +3,9 @@ import React, { ComponentPropsWithRef, ElementType, forwardRef } from 'react';
 
 const variantStyles = {
   primary:
-    'bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70',
+    'bg-primary font-semibold text-white hover:bg-primary-light active:scale-[0.98] dark:bg-dark-accent dark:hover:bg-dark-accent-hover',
   secondary:
-    'bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70',
+    'bg-primary/[0.06] font-medium text-primary hover:bg-primary/10 active:scale-[0.98] dark:bg-dark-accent/10 dark:text-dark-accent-hover dark:hover:bg-dark-accent/20',
 } as const;
 
 type Props<T extends ElementType> = {
@@ -23,7 +23,7 @@ export const Button = forwardRef(
     return (
       <Component
         className={clsx(
-          'inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none',
+          'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full py-2 px-5 text-sm outline-offset-2 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-dark-accent',
           variantStyles[variant],
           className,
         )}

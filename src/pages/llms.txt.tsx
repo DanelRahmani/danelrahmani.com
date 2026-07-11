@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   const body = `# Danel Rahmani
 
-> Personal site of Danel Rahmani, an International Business student at the University of Groningen and the founder of Axiom Digital. It holds his notes, projects and CV.
+> Personal site of Danel Rahmani, founder of Axiom Digital and International Business student at the University of Groningen. It holds his notes, projects and CV.
 
 Danel writes about business and finance, AI and IT, and occasionally politics. From September 2026 to February 2027 he is on exchange at the School of Political Science and Economics at Waseda University in Tokyo.
 

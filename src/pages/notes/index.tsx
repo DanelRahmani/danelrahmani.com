@@ -31,8 +31,10 @@ export default function Notes({ notes, tags }: Props) {
         title="My Notes on various topics"
         intro="All of my thoughts on business, finance, the economy, technology, politics and much more"
       >
-        <h3 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">Tags</h3>
-        <div className="mt-4 flex max-w-xl flex-wrap gap-1 font-mono">
+        <h2 className="font-serif text-2xl font-semibold tracking-tight text-stone-900 dark:text-zinc-100">
+          Tags
+        </h2>
+        <div className="mt-4 flex max-w-xl flex-wrap gap-1.5">
           {tags.map((tag) => (
             <Badge key={tag} href={`/tags/${tag}`}>
               #{tag}
@@ -40,7 +42,7 @@ export default function Notes({ notes, tags }: Props) {
           ))}
         </div>
 
-        <div className="mt-24 md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+        <div className="mt-24 md:seam-l md:pl-6">
           <div className="flex max-w-3xl flex-col space-y-16">
             {notes.map((note) => (
               <NotePreview key={note.slug} note={note} />

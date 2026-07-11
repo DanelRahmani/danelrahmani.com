@@ -1,6 +1,7 @@
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useMemo, useState } from 'react';
 import AvatarImage from '../../public/assets/blog/authors/danel.jpeg';
 import { Container } from '../components/Container';
@@ -42,9 +43,9 @@ export default function AboutMe() {
             <div className="max-w-xs px-2.5 lg:max-w-none">
               <Image
                 src={AvatarImage}
-                alt=""
+                alt="Portrait of Danel Rahmani"
                 sizes="(min-width: 1024px) 32rem, 20rem"
-                className="aspect-square rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+                className="profile-glow aspect-square rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
               />
             </div>
           </div>
@@ -78,18 +79,42 @@ export default function AboutMe() {
               </a>
             </div>
             <Section>
-              <Section.Title as="h2">Work</Section.Title>
+              <Section.Title as="h2">Now</Section.Title>
               <Section.Content>
-                Hello, I’m Danel Rahmani, an International Business student with a strong interest in international business and finance. 
-                I am currently focused on developing analytical and practical skills relevant to business and finance. 
-                Welcome to my page, where I share my interests and projects.
-                <br />
+                In July 2026 I founded{' '}
+                <ExternalLink href="https://axiomdigital.nl">Axiom Digital</ExternalLink>, a digital
+                agency focused on AI integration and digital transformation. I help businesses work
+                out where AI and automation actually pay off, then build and deliver it. If that
+                sounds useful to you,{' '}
+                <ExternalLink href="https://axiomdigital.nl">work with me</ExternalLink>.
+              </Section.Content>
+            </Section>
+            <Section>
+              <Section.Title as="h2">Study</Section.Title>
+              <Section.Content>
+                I study International Business at the University of Groningen (2024-2027), where I
+                am also part of the Honours College. My GPA so far: 9.25 in year one and 9.00 in
+                year two. This September I leave for an exchange semester at Waseda University in
+                Tokyo, at the School of Political Science and Economics.
+              </Section.Content>
+            </Section>
+            <Section>
+              <Section.Title as="h2">The atelier</Section.Title>
+              <Section.Content>
+                Since 2020 I have worked in my family&apos;s business,{' '}
+                <ExternalLink href="https://top-atelier.com/">
+                  Rahmani&apos;s Gordijn Kledingatelier
+                </ExternalLink>
+                , a curtain and clothing atelier. It taught me what good work looks like up close:
+                exact measurements, honest materials, and finishing the seams nobody sees. It is
+                also why this site looks the way it does: the stitched rules and the maroon thread
+                come from there.
               </Section.Content>
             </Section>
             <Section>
               <Section.Title as="h2">Books I recommend</Section.Title>
               <Section.Content>
-                <ul className="mt-1 list-disc list-inside">
+                <ul className="mt-1 list-disc list-inside marker:text-primary/50 dark:marker:text-dark-accent/60">
                   {Books.map((book) => (
                     <li key={book.name}>
                       <ExternalLink href={book.link}>{book.name}</ExternalLink>
@@ -101,7 +126,7 @@ export default function AboutMe() {
              <Section>
               <Section.Title as="h2">Series I recommend</Section.Title>
               <Section.Content>
-                <ul className="mt-1 list-disc list-inside">
+                <ul className="mt-1 list-disc list-inside marker:text-primary/50 dark:marker:text-dark-accent/60">
                   {Series.map((series) => (
                     <li key={series.name}>
                       <ExternalLink href={series.link}>{series.name}</ExternalLink>
@@ -116,6 +141,30 @@ export default function AboutMe() {
                 A playlist of what I&apos;ve had on lately, over on{' '}
                 <ExternalLink href="https://open.spotify.com/playlist/1K9MAIPAtNMpoNnGwnk9by">
                   Spotify
+                </ExternalLink>
+                .
+              </Section.Content>
+            </Section>
+            <Section>
+              <Section.Title as="h2">Photos</Section.Title>
+              <Section.Content>
+                When I travel I take pictures: Tokyo, Kyoto and Osaka, CERN, Geneva and Bern, and
+                the occasional cat. The full set lives on the{' '}
+                <Link
+                  href="/images"
+                  className="underline decoration-primary/40 underline-offset-2 transition hover:decoration-primary dark:decoration-dark-accent/50 dark:hover:decoration-dark-accent"
+                >
+                  images page
+                </Link>
+                .
+              </Section.Content>
+            </Section>
+            <Section>
+              <Section.Title as="h2">Get in touch</Section.Title>
+              <Section.Content>
+                The fastest way to reach me is email:{' '}
+                <ExternalLink href="mailto:danelrahmani@outlook.com">
+                  danelrahmani@outlook.com
                 </ExternalLink>
                 .
               </Section.Content>
