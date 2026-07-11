@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 
 import { notesApi } from '../lib/notesApi';
 
-const STATIC_PATHS = ['', '/about', '/projects', '/notes'];
+const STATIC_PATHS = ['', '/about', '/projects', '/notes', '/images'];
 
 const escapeXml = (value: string) =>
   value.replace(/[<>&'"]/g, (char) => {

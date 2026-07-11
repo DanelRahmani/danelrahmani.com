@@ -1,7 +1,16 @@
-// src/images/selected/index.ts
+// src/images/travel/index.ts
 import akihabara1 from './Akihabara1.jpg';
 import akihabara2 from './Akihabara2.jpg';
 import akihabara3 from './Akihabara3.jpg';
+import bern1 from './Bern1.jpg';
+import cernAntimatterFactory from './CernAntimatterFactory.jpg';
+import cernDataCentre from './CernDataCentre.jpg';
+import cernDetector from './CernDetector.jpg';
+import cernLeir from './CernLEIR.jpg';
+import cernLhcb from './CernLHCb.jpg';
+import genevaAriana from './GenevaAriana.jpg';
+import genevaBrunswick from './GenevaBrunswick.jpg';
+import genevaFlowerClock from './GenevaFlowerClock.jpg';
 import ginza1 from './Ginza1.jpg';
 import ginza2 from './Ginza2.jpg';
 import groningen1 from './Groningen1.jpg';
@@ -24,29 +33,94 @@ import tokyoMisc1 from './TokyoMisc1.jpg';
 import tokyoMisc2 from './TokyoMisc2.jpg';
 import uenoPark from './UenoPark.jpg';
 
+/**
+ * Ordered so neighbouring photos come from different places and subjects — the strip should
+ * read as a mix, not as a block of Tokyo followed by a block of CERN.
+ */
 export const travelImages = [
+  { img: skytree1, title: 'Tokyo Skytree (Japan)', alt: 'The Tokyo Skytree tower' },
+  {
+    img: cernLhcb,
+    title: 'LHCb, CERN (Switzerland)',
+    alt: 'The red LHCb detector in its underground cavern at CERN',
+  },
+  {
+    img: inari1,
+    title: 'Fushimi Inari, Kyoto (Japan)',
+    alt: 'Rows of vermilion torii gates at Fushimi Inari Taisha, Kyoto',
+  },
+  {
+    img: genevaFlowerClock,
+    title: 'Flower Clock, Geneva (Switzerland)',
+    alt: 'The Horloge Fleurie, a working clock planted in red and yellow flowers, Geneva',
+  },
   { img: akihabara1, title: 'Akihabara, Tokyo (Japan)', alt: 'Street scene in Akihabara, Tokyo' },
+  {
+    img: bern1,
+    title: 'Bern (Switzerland)',
+    alt: 'The spire of the Bern Minster rising over the old town rooftops',
+  },
+  { img: osakacastle1, title: 'Osaka Castle (Japan)', alt: 'The grounds of Osaka Castle' },
+  {
+    img: cernDataCentre,
+    title: 'Data Centre, CERN (Switzerland)',
+    alt: 'Rows of server racks in the CERN data centre',
+  },
+  { img: randomcat1, title: 'A Cat', alt: 'A cat photographed on a walk' },
+  { img: groningen1, title: 'Groningen (Netherlands)', alt: 'A view of Groningen' },
+  {
+    img: metbuilding1,
+    title: 'Metropolitan Government Building, Tokyo (Japan)',
+    alt: 'The Tokyo Metropolitan Government Building',
+  },
+  {
+    img: genevaBrunswick,
+    title: 'Brunswick Monument, Geneva (Switzerland)',
+    alt: 'The neo-Gothic Brunswick Monument beside Lake Geneva',
+  },
+  { img: toji1, title: 'Toji Temple, Kyoto (Japan)', alt: 'The pagoda at Toji Temple, Kyoto' },
+  {
+    img: cernLeir,
+    title: 'LEIR, CERN (Switzerland)',
+    alt: 'The Low Energy Ion Ring accelerator hall at CERN',
+  },
+  { img: ginza1, title: 'Ginza, Tokyo (Japan)', alt: 'The Ginza shopping district, Tokyo' },
+  {
+    img: genevaAriana,
+    title: 'Ariana, Geneva (Switzerland)',
+    alt: 'A neoclassical palace behind a fountain in Geneva',
+  },
+  { img: skytree2, title: 'Tokyo Skytree (Japan)', alt: 'The Tokyo Skytree at dusk' },
+  {
+    img: cernAntimatterFactory,
+    title: 'Antimatter Factory, CERN (Switzerland)',
+    alt: 'Experiments and beamlines in the Antimatter Factory at CERN',
+  },
+  { img: uenoPark, title: 'Ueno Park, Tokyo (Japan)', alt: 'Ueno Park in Tokyo' },
+  { img: randomcat2, title: 'A Cat', alt: 'Another cat photographed on a walk' },
   { img: akihabara2, title: 'Akihabara, Tokyo (Japan)', alt: 'Akihabara at night, Tokyo' },
+  {
+    img: cernDetector,
+    title: 'A Detector, CERN (Switzerland)',
+    alt: 'A cylindrical particle detector on display at CERN',
+  },
+  { img: osakacastle2, title: 'Osaka Castle (Japan)', alt: 'The main tower of Osaka Castle' },
+  { img: ikebukuro1, title: 'Ikebukuro, Tokyo (Japan)', alt: 'The Ikebukuro area of Tokyo' },
+  { img: toji2, title: 'Toji Temple, Kyoto (Japan)', alt: 'The grounds of Toji Temple, Kyoto' },
+  {
+    img: metbuilding2,
+    title: 'Metropolitan Government Building, Tokyo (Japan)',
+    alt: 'The Tokyo skyline seen from the Metropolitan Government Building',
+  },
+  { img: skytree3, title: 'Tokyo Skytree (Japan)', alt: 'The Tokyo Skytree seen from a distance' },
+  { img: tokyoMisc1, title: 'Tokyo (Japan)', alt: 'A street scene in Tokyo' },
+  { img: ginza2, title: 'Ginza, Tokyo (Japan)', alt: 'Streets and storefronts in Ginza, Tokyo' },
   { img: akihabara3, title: 'Akihabara, Tokyo (Japan)', alt: 'Shops and signs in Akihabara, Tokyo' },
-  { img: ginza1, title: 'Ginza, Tokyo (Japan)', alt: 'Ginza shopping district, Tokyo' },
-  { img: ginza2, title: 'Ginza, Tokyo (Japan)', alt: 'Ginza streets and storefronts, Tokyo' },
-  { img: groningen1, title: 'Groningen, Netherlands', alt: 'Photo taken in Groningen, Netherlands' },
-  { img: ikebukuro1, title: 'Ikebukuro, Tokyo (Japan)', alt: 'Ikebukuro area, Tokyo' },
-  { img: inari1, title: 'Fushimi Inari, Kyoto (Japan)', alt: 'Torii gates at Fushimi Inari Taisha, Kyoto' },
-  { img: metbuilding1, title: 'Tokyo Metropolitan Government Building (Japan)', alt: 'Tokyo Metropolitan Government Building' },
-  { img: metbuilding2, title: 'Tokyo Metropolitan Government Building (Japan)', alt: 'Tokyo skyline from the Met Building' },
-  { img: metbuilding3, title: 'Tokyo Metropolitan Government Building (Japan)', alt: 'Metropolitan Building observation area, Tokyo' },
-  { img: osakacastle1, title: 'Osaka Castle (Japan)', alt: 'Osaka Castle grounds' },
-  { img: osakacastle2, title: 'Osaka Castle (Japan)', alt: 'Osaka Castle tower' },
-  { img: randomcat1, title: 'Random Cat', alt: 'Random cat photo' },
-  { img: randomcat2, title: 'Random Cat', alt: 'Random cat photo' },
-  { img: skytree1, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree' },
-  { img: skytree2, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree at dusk' },
-  { img: skytree3, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree from distance' },
-  { img: skytree4, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree lights' },
-  { img: toji1, title: 'Toji Temple, Kyoto (Japan)', alt: 'Toji Temple pagoda, Kyoto' },
-  { img: toji2, title: 'Toji Temple, Kyoto (Japan)', alt: 'Toji Temple grounds' },
-  { img: tokyoMisc1, title: 'Tokyo (Japan)', alt: 'Miscellaneous scene in Tokyo' },
+  {
+    img: metbuilding3,
+    title: 'Metropolitan Government Building, Tokyo (Japan)',
+    alt: 'The observation deck of the Tokyo Metropolitan Government Building',
+  },
+  { img: skytree4, title: 'Tokyo Skytree (Japan)', alt: 'The Tokyo Skytree lit up at night' },
   { img: tokyoMisc2, title: 'Tokyo (Japan)', alt: 'Another scene in Tokyo' },
-  { img: uenoPark, title: 'Ueno Park, Tokyo (Japan)', alt: 'Ueno Park, Tokyo' },
 ];

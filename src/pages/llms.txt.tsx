@@ -36,6 +36,7 @@ ${noteLinks || '- No notes published yet.'}
 - [Home](${baseUrl}/): Introduction, recent notes and a summary of his work history and education.
 - [About](${baseUrl}/about): Longer biography, plus the books, series and music he recommends.
 - [Projects](${baseUrl}/projects): Things he has built, current and past.
+- [Images](${baseUrl}/images): Photographs from Japan, CERN and Switzerland, and the Netherlands.
 - [Notes](${baseUrl}/notes): Index of everything he has written.
 
 ## Optional

@@ -40,3 +40,7 @@ yarn-error.log*
 
 # generated at runtime by src/pages/sitemap.xml.tsx
 public/sitemap.xml
+
+# staging folder for unprocessed photos (originals, ~56MB) — the adjusted
+# versions live in src/images/travel/
+src/images/travel/New-pics-to-adjust/
