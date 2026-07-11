@@ -104,6 +104,12 @@ export const Work = [
 
 export const Education = [
   {
+    school: 'Waseda University',
+    degree: 'Exchange, School of Political Science and Economics',
+    start: 'Sep 2026',
+    end: 'Feb 2027',
+  },
+  {
     school: 'University of Groningen',
     degree: 'Honours College',
     start: 'Apr 2025',
