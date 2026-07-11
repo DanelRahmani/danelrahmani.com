@@ -28,8 +28,13 @@ const CloseIcon = () => (
   </svg>
 );
 
+// Solid enough to stay legible over a bright photo as well as a dark one.
 const overlayButton =
-  'pointer-events-auto flex h-11 w-11 flex-none items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:opacity-30 disabled:hover:bg-white/10';
+  'pointer-events-auto flex h-11 w-11 flex-none items-center justify-center rounded-full bg-black/60 shadow-lg ring-1 ring-white/25 backdrop-blur transition hover:bg-black/80 hover:ring-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:opacity-25 disabled:hover:bg-black/60 disabled:hover:ring-white/25';
+
+// The shared look for text floating on top of a photograph.
+const pill =
+  'rounded-full bg-black/60 px-3 py-1 font-mono text-xs font-medium text-white shadow-lg ring-1 ring-white/20 backdrop-blur';
 
 const Lightbox = ({
   index,
@@ -83,7 +88,7 @@ const Lightbox = ({
       className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm"
     >
       <div className="pointer-events-none flex items-center justify-between p-4">
-        <span className="font-mono text-xs text-white/70">
+        <span className={pill}>
           {index + 1} / {travelImages.length}
         </span>
         <button
@@ -121,9 +126,7 @@ const Lightbox = ({
             sizes="90vw"
             className="max-h-[75vh] w-auto max-w-full rounded-lg object-contain"
           />
-          <figcaption className="text-center font-mono text-xs text-white/80">
-            {photo.title}
-          </figcaption>
+          <figcaption className={pill}>{photo.title}</figcaption>
         </figure>
 
         <button
@@ -177,7 +180,7 @@ export default function Images() {
                   sizes="(min-width: 1024px) 21rem, (min-width: 640px) 45vw, 90vw"
                   className="h-auto w-full transition duration-300 motion-safe:group-hover:scale-[1.03]"
                 />
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-3 pb-2 pt-8 text-left font-mono text-xs font-medium text-white">
+                <span className={`pointer-events-none absolute bottom-3 left-3 right-3 w-fit max-w-[calc(100%-1.5rem)] truncate text-left ${pill}`}>
                   {title}
                 </span>
               </button>
