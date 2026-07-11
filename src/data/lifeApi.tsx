@@ -7,6 +7,7 @@ import { ThreadsIcon } from '../components/icons/ThreadsIcon';
 import MyWebsite from '../images/logos/mywebsite.png';
 import ServerLogo from '../images/logos/server.png';
 import RahmaniLogo from '../images/logos/rahmani.svg';
+import AxiomDigitalLogo from '../images/logos/axiom-digital-logo.png';
 import { manual } from 'prismjs';
 export const Name = 'Danel Rahmani';
 
@@ -32,13 +33,33 @@ export type Project = {
 
 export const MyCurrentProjects: Project[] = [
   {
+    title: 'Axiom Digital',
+    techStack: ['Business', 'AI', 'Digital Transformation', 'Consulting'],
+    description: 'My own digital agency focused on AI integration and digital transformation for businesses.',
+    logo: AxiomDigitalLogo,
+    link: {
+      label: 'axiomdigital.nl',
+      href: 'https://axiomdigital.nl',
+    },
+  },
+  {
     title: 'My personal website',
     techStack: ['NodeJS', 'React', 'TypeScript','Notion','DNS management'],
     description: 'My personal website on the internet.',
     logo: MyWebsite,
     link: {
-      label: 'github.com',
+      label: 'GitHub Repository',
       href: 'https://github.com/DanelRahmani/website/',
+    },
+  },
+  {
+    title: 'AlefBa',
+    techStack: ['NodeJS','HTML' ,'DNS management'],
+    description: 'A tool to learn to Persian Alfabet',
+    logo: ServerLogo,
+    link: {
+      label: 'Alefba',
+      href: 'https://alefba.vercel.app',
     },
   },
 ];
@@ -66,17 +87,49 @@ export const SocialMedia = [
 
 export const Work = [
   {
-    company: 'Rahmani\'s Gordijn Kledingatelier',
-    title: 'General Employee & Tailor',
-    logo: RahmaniLogo,
-    start: '2022',
+    company: 'Axiom Digital',
+    title: 'Founder',
+    logo: AxiomDigitalLogo,
+    start: 'Jul 2026',
     end: 'Present',
+  },
+  {
+    company: "Rahmani's Gordijn Kledingatelier",
+    title: 'Employee',
+    logo: RahmaniLogo,
+    start: 'Sep 2020',
+    end: 'Present',
+  },
+] as const;
+
+export const Education = [
+  {
+    school: 'University of Groningen',
+    degree: 'Honours College',
+    start: 'Apr 2025',
+    end: 'Jul 2027',
+  },
+  {
+    school: 'University of Groningen',
+    degree: 'BSc International Business',
+    start: '2024',
+    end: '2027',
+  },
+  {
+    school: 'Rsg De Borgen',
+    degree: 'VWO, E&M Profiel',
+    start: 'Sep 2018',
+    end: 'Jul 2024',
   },
 ] as const;
 
 export const CompaniesLinks = [
   {
-    name: 'Rahmani\'s Gordijn Kledingatelier',
+    name: 'Axiom Digital',
+    link: 'https://axiomdigital.nl',
+  },
+  {
+    name: "Rahmani's Gordijn Kledingatelier",
     link: 'https://top-atelier.com/',
   },
 ] as const;
