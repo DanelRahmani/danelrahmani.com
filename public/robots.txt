@@ -7,3 +7,7 @@ Host: https://danelrahmani.com
 
 # Sitemaps
 Sitemap: https://danelrahmani.com/sitemap.xml
+
+# LLM-readable content — https://llmstxt.org
+# https://danelrahmani.com/llms.txt
+# https://danelrahmani.com/llms-full.txt
