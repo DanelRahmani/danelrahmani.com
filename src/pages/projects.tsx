@@ -5,6 +5,7 @@ import { PageLayout } from '../components/PageLayout';
 import { ProjectCard } from '../components/ProjectCard';
 import { MyCurrentProjects, MyPastProjects } from '../data/lifeApi';
 import { ANIMATION_FROM_PROPS, ANIMATION_TO_PROPS } from '../lib/animation';
+import { buildOpenGraphUrl } from '../lib/og';
 
 const seoTitle = 'Projects';
 const seoDescription = "Projects I've worked on";
@@ -19,7 +20,7 @@ export default function Creating() {
         openGraph={{
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/og?title=${seoTitle}&description=${seoDescription}`,
+              url: buildOpenGraphUrl({ title: seoTitle, description: seoDescription }),
             },
           ],
         }}

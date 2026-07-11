@@ -5,6 +5,7 @@ import { Badge } from '../../components/Badge';
 import { PageLayout } from '../../components/PageLayout';
 import { NotePreview } from '../../components/notes/NotePreview';
 import { Note, notesApi } from '../../lib/notesApi';
+import { buildOpenGraphUrl } from '../../lib/og';
 
 const seoTitle = 'Notes';
 const seoDescription =
@@ -23,7 +24,7 @@ export default function Notes({ notes, tags }: Props) {
         description={seoDescription}
         canonical={`${process.env.NEXT_PUBLIC_URL}/notes`}
         openGraph={{
-          images: [{ url: `${process.env.NEXT_PUBLIC_URL}/api/og?title=${seoTitle}` }],
+          images: [{ url: buildOpenGraphUrl({ title: seoTitle, description: seoDescription }) }],
         }}
       />
       <PageLayout

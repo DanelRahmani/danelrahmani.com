@@ -37,3 +37,6 @@ yarn-error.log*
 
 # Contentlayer
 .contentlayer
+
+# generated at runtime by src/pages/sitemap.xml.tsx
+public/sitemap.xml

@@ -9,6 +9,7 @@ import { SocialLink } from '../components/SocialLink';
 import { NotePreview } from '../components/notes/NotePreview';
 import { About, Name, SocialMedia } from '../data/lifeApi';
 import { Note, notesApi } from '../lib/notesApi';
+import { buildOpenGraphUrl } from '../lib/og';
 
 const seoTitle = 'Danel Rahmani';
 const seoDescription =
@@ -28,7 +29,7 @@ export default function Home({ latestNotes }: Props) {
         openGraph={{
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/og?title=${seoTitle}&description=${seoDescription}`,
+              url: buildOpenGraphUrl({ title: seoTitle, description: seoDescription }),
             },
           ],
         }}
@@ -37,7 +38,7 @@ export default function Home({ latestNotes }: Props) {
         <div className="max-w-2xl">
           <PageTitle>{Name}</PageTitle>
           <p className="mt-6 max-w-2xl text-base text-balance">{About}</p>
-          <div className="mt-6 flex gap-6">
+          <ul role="list" className="mt-6 flex gap-6">
             {SocialMedia.map((socialProfile) => (
               <SocialLink
                 key={socialProfile.name}
@@ -46,7 +47,7 @@ export default function Home({ latestNotes }: Props) {
                 icon={socialProfile.icon}
               />
             ))}
-          </div>
+          </ul>
         </div>
       </Container>
       <Photos />

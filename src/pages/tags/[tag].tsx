@@ -5,6 +5,7 @@ import React from 'react';
 import { PageLayout } from '../../components/PageLayout';
 import { NotePreview } from '../../components/notes/NotePreview';
 import { Note, notesApi } from '../../lib/notesApi';
+import { buildOpenGraphUrl } from '../../lib/og';
 
 const seoTitle = 'Tags';
 const seoDescription = 'All of my blog posts tagged with ';
@@ -24,7 +25,7 @@ export default function Tag({ tag, relatedNotes }: Props) {
         openGraph={{
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/og?title=${seoTitle}&description=${seoDescription}`,
+              url: buildOpenGraphUrl({ title: seoTitle, description: seoDescription }),
             },
           ],
         }}

@@ -9,6 +9,7 @@ import { PageTitle } from '../components/PageTitle';
 import { Section } from '../components/Section';
 import { SocialLink } from '../components/SocialLink';
 import { MailIcon } from '../components/icons/MailIcon';
+import { buildOpenGraphUrl } from '../lib/og';
 import {
   AboutExtended,
   Books,
@@ -30,7 +31,7 @@ export default function AboutMe() {
         openGraph={{
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/og?title=${seoTitle}&description=${seoDescription}`,
+              url: buildOpenGraphUrl({ title: seoTitle, description: seoDescription }),
             },
           ],
         }}
@@ -51,29 +52,31 @@ export default function AboutMe() {
             <PageTitle>Hi, I am Danel Rahmani</PageTitle>
             <div className="mt-6 text-base">{AboutExtended}</div>
             <div className="mt-6 flex items-center gap-6">
-               {SocialMedia.map((socialProfile) => (
-               <SocialLink
-               key={socialProfile.name}
-              aria-label={`Follow on ${socialProfile.name}`}
-              href={socialProfile.link}
-              icon={socialProfile.icon}
-               />
-               ))}
-             {/* Email icon */}
-               <SocialLink
-                aria-label="Send me an email"
-               href="mailto:danelrahmani@outlook.com"
-                icon={MailIcon}
-               />
+              <ul role="list" className="flex items-center gap-6">
+                {SocialMedia.map((socialProfile) => (
+                  <SocialLink
+                    key={socialProfile.name}
+                    aria-label={`Follow on ${socialProfile.name}`}
+                    href={socialProfile.link}
+                    icon={socialProfile.icon}
+                  />
+                ))}
+                {/* Email icon */}
+                <SocialLink
+                  aria-label="Send me an email"
+                  href="mailto:danelrahmani@outlook.com"
+                  icon={MailIcon}
+                />
+              </ul>
               <a
-             href="/assets/resume.pdf"
-            download
-            aria-label="Download resume"
-             className="inline-flex items-center rounded-md px-3 py-1 text-sm font-medium text-white bg-primary hover:bg-primary-light dark:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition"
-             >
-            Resume
+                href="/assets/resume.pdf"
+                download
+                aria-label="Download resume"
+                className="inline-flex items-center rounded-md px-3 py-1 text-sm font-medium text-white bg-primary hover:bg-primary-light dark:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition"
+              >
+                Resume
               </a>
-          </div>
+            </div>
             <Section>
               <Section.Title as="h2">Work</Section.Title>
               <Section.Content>

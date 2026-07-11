@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/react';
 import 'focus-visible';
+import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'next-themes';
 import { AppProps } from 'next/app';
 import { GeistSans } from 'geist/font/sans';
@@ -26,6 +27,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <>
+      <DefaultSeo
+        twitter={{ cardType: 'summary_large_image', handle: '@DanelRahmani' }}
+        openGraph={{ type: 'website', locale: 'en_US', siteName: 'Danel Rahmani' }}
+      />
       <ThemeProvider attribute="class">
         <div className={`${GeistSans.className}`}>
           <div className="fixed inset-0 flex justify-center sm:px-8">

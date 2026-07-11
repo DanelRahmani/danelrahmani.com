@@ -1,7 +1,12 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Work, Education } from '../data/lifeApi';
 import { BriefcaseIcon } from './icons/BriefcaseIcon';
 import { AcademicCapIcon } from './icons/AcademicCapIcon';
+
+// The image optimizer rejects SVG unless dangerouslyAllowSVG is set, so vector
+// logos are passed through untouched while raster logos get resized.
+const isSvg = (logo: StaticImageData | string) =>
+  (typeof logo === 'string' ? logo : logo.src).endsWith('.svg');
 
 export const Resume = () => {
   return (
@@ -18,9 +23,10 @@ export const Resume = () => {
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white overflow-hidden">
                   <Image
                     src={role.logo}
-                    alt="Logo"
+                    alt=""
+                    sizes="32px"
                     className="h-full w-full object-cover"
-                    unoptimized
+                    unoptimized={isSvg(role.logo)}
                   />
                 </div>
               </div>

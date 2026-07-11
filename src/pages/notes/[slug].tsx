@@ -7,6 +7,7 @@ import { XIcon } from '../../components/icons/XIcon';
 import { NoteLayout } from '../../components/notes/NoteLayout';
 import { NotionBlockRenderer } from '../../components/notion/NotionBlockRenderer';
 import { Note as NoteType, notesApi } from '../../lib/notesApi';
+import { buildOpenGraphUrl } from '../../lib/og';
 
 type Props = {
   note: NoteType;
@@ -19,7 +20,7 @@ export default function Note({
   previousPathname,
 }: Props & { previousPathname: string }) {
   const url = `${process.env.NEXT_PUBLIC_URL}/notes/${slug}`;
-  const openGraphImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?title=${title}&description=${description}`;
+  const openGraphImageUrl = buildOpenGraphUrl({ title, description });
 
   useEffect(() => {
     Prism.highlightAll();
