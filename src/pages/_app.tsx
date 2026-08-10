@@ -1,4 +1,4 @@
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 import 'focus-visible';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { DefaultSeo } from 'next-seo';
