@@ -8,6 +8,10 @@ import MyWebsite from '../images/logos/mywebsite.png';
 import ServerLogo from '../images/logos/server.png';
 import RahmaniLogo from '../images/logos/rahmani.svg';
 import AxiomDigitalLogo from '../images/logos/axiom-digital-logo.png';
+import AlefbeLogo from '../images/logos/alefbe.png';
+import EconoSiftLogo from '../images/logos/econosift.png';
+import NihongoPathLogo from '../images/logos/nihongo-path.svg';
+import CraftyOSLogo from '../images/logos/craftyos.svg';
 
 export const Name = 'Danel Rahmani';
 
@@ -55,23 +59,57 @@ export const MyCurrentProjects: Project[] = [
     },
   },
   {
+    title: 'EconoSift',
+    techStack: ['Python', 'FastAPI', 'Next.js', 'Tauri', 'Docker'],
+    description:
+      'An open-source, self-hosted research workbench for macroeconomics and financial markets: global macro data, quant research, and portfolio and risk tools, with optional AI summaries.',
+    logo: EconoSiftLogo,
+    link: {
+      label: 'GitHub Repository',
+      href: 'https://github.com/DanelRahmani/econosift',
+    },
+  },
+  {
+    title: 'Alefbe',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    description:
+      'An example-first course in Iranian Persian, explained in English: structured lessons plus a script trainer with spaced repetition.',
+    logo: AlefbeLogo,
+    link: {
+      label: 'alefbe.study',
+      href: 'https://alefbe.study',
+    },
+  },
+  {
+    title: 'Nihongo Path',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    description:
+      'A Japanese study app: hiragana and katakana with a spaced-repetition drill, plus 62 lessons on particles, grammar, conjugation and conversation.',
+    logo: NihongoPathLogo,
+    link: {
+      label: 'japanese.danelrahmani.com',
+      href: 'https://japanese.danelrahmani.com',
+    },
+  },
+  {
+    title: 'CraftyOS',
+    techStack: ['Go', 'Svelte', 'TypeScript', 'Linux'],
+    description:
+      'Turns any spare PC into a Minecraft hosting appliance: a self-hosted server manager with a web panel, automatic Java, backups to the cloud and remote access.',
+    logo: CraftyOSLogo,
+    link: {
+      label: 'GitHub Repository',
+      href: 'https://github.com/DanelRahmani/craftyos',
+    },
+  },
+  {
     title: 'My personal website',
     techStack: ['NodeJS', 'React', 'TypeScript','Notion','DNS management'],
     description: 'My personal website on the internet.',
     logo: MyWebsite,
     link: {
       label: 'GitHub Repository',
-      href: 'https://github.com/DanelRahmani/website/',
-    },
-  },
-  {
-    title: 'AlefBe',
-    techStack: ['NodeJS', 'HTML', 'DNS management'],
-    description: 'A tool for learning the Persian alphabet.',
-    logo: ServerLogo,
-    link: {
-      label: 'alefbe.study',
-      href: 'https://www.alefbe.study/',
+      href: 'https://github.com/DanelRahmani/danelrahmani.com',
     },
   },
 ];

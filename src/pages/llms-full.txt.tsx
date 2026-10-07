@@ -2,14 +2,14 @@ import { GetServerSideProps } from 'next';
 
 import { notesApi } from '../lib/notesApi';
 import { notionBlocksToMarkdown } from '../lib/notionToMarkdown';
-import { Books, Music, Series, Work, Education } from '../data/lifeApi';
+import { Books, Music, Series, Work, Education, MyCurrentProjects } from '../data/lifeApi';
 
 /**
  * The expanded companion to /llms.txt: the same structure, but with the full text of every
  * note inlined rather than linked, so a model can read the site in one request.
  *
  * The site's `About` export is JSX rather than a string, so it cannot be interpolated here;
- * the prose below is written for this file. Everything factual (work, education,
+ * the prose below is written for this file. Everything factual (work, education, projects,
  * recommendations) comes from the same lifeApi source the pages render from.
  */
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
@@ -55,6 +55,13 @@ ${Education.map(
     `- ${entry.degree}, ${entry.school} (${entry.start} - ${entry.end})${
       entry.distinction ? `, ${entry.distinction}` : ''
     }`,
+).join('\n')}
+
+# Projects
+
+${MyCurrentProjects.map(
+  (project) =>
+    `- ${project.title}: ${project.description}${project.link ? ` (${project.link.href})` : ''}`,
 ).join('\n')}
 
 # Recommendations
