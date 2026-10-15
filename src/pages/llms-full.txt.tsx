@@ -61,7 +61,7 @@ ${Education.map(
 
 ${MyCurrentProjects.map(
   (project) =>
-    `- ${project.title}: ${project.description}${project.link ? ` (${project.link.href})` : ''}`,
+    `- ${project.title}: ${project.description}${project.links?.length ? ` (${project.links.map((link) => link.href).join(', ')})` : ''}`,
 ).join('\n')}
 
 # Recommendations

@@ -12,6 +12,9 @@ import AlefbeLogo from '../images/logos/alefbe.png';
 import EconoSiftLogo from '../images/logos/econosift.png';
 import NihongoPathLogo from '../images/logos/nihongo-path.svg';
 import CraftyOSLogo from '../images/logos/craftyos.svg';
+import EconoSimLogo from '../images/logos/econosim.svg';
+import RunwayLogo from '../images/logos/runway.svg';
+import DeskSeekLogo from '../images/logos/deskseek.png';
 
 export const Name = 'Danel Rahmani';
 
@@ -41,10 +44,10 @@ export type Project = {
   techStack: string[];
   description: string;
   logo: any;
-  link?: {
+  links?: {
     label: string;
     href: string;
-  };
+  }[];
 };
 
 export const MyCurrentProjects: Project[] = [
@@ -53,10 +56,7 @@ export const MyCurrentProjects: Project[] = [
     techStack: ['Business', 'AI', 'Digital Transformation', 'Consulting'],
     description: 'My own digital agency focused on AI integration and digital transformation for businesses.',
     logo: AxiomDigitalLogo,
-    link: {
-      label: 'axiomdigital.nl',
-      href: 'https://axiomdigital.nl',
-    },
+    links: [{ label: 'axiomdigital.nl', href: 'https://axiomdigital.nl' }],
   },
   {
     title: 'EconoSift',
@@ -64,10 +64,18 @@ export const MyCurrentProjects: Project[] = [
     description:
       'An open-source, self-hosted research workbench for macroeconomics and financial markets: global macro data, quant research, and portfolio and risk tools, with optional AI summaries.',
     logo: EconoSiftLogo,
-    link: {
-      label: 'GitHub Repository',
-      href: 'https://github.com/DanelRahmani/econosift',
-    },
+    links: [{ label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/econosift' }],
+  },
+  {
+    title: 'EconoSim',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Recharts', 'KaTeX'],
+    description:
+      'A browser-based economics simulator: 21 textbook models, from Solow and IS-LM to Mundell-Fleming and game theory, with shocks, time paths and the exact step-by-step working behind every figure.',
+    logo: EconoSimLogo,
+    links: [
+      { label: 'econosim.danelrahmani.com', href: 'https://econosim.danelrahmani.com' },
+      { label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/EconoSim' },
+    ],
   },
   {
     title: 'Alefbe',
@@ -75,10 +83,10 @@ export const MyCurrentProjects: Project[] = [
     description:
       'An example-first course in Iranian Persian, explained in English: structured lessons plus a script trainer with spaced repetition.',
     logo: AlefbeLogo,
-    link: {
-      label: 'alefbe.study',
-      href: 'https://alefbe.study',
-    },
+    links: [
+      { label: 'alefbe.study', href: 'https://alefbe.study' },
+      { label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/alefbe' },
+    ],
   },
   {
     title: 'Nihongo Path',
@@ -86,10 +94,29 @@ export const MyCurrentProjects: Project[] = [
     description:
       'A Japanese study app: hiragana and katakana with a spaced-repetition drill, plus 62 lessons on particles, grammar, conjugation and conversation.',
     logo: NihongoPathLogo,
-    link: {
-      label: 'japanese.danelrahmani.com',
-      href: 'https://japanese.danelrahmani.com',
-    },
+    links: [
+      { label: 'japanese.danelrahmani.com', href: 'https://japanese.danelrahmani.com' },
+      { label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/nihongo-path' },
+    ],
+  },
+  {
+    title: 'Runway',
+    techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'IndexedDB'],
+    description:
+      'A private, browser-local cash-flow forecaster for freelancers, students and small businesses: a day-by-day balance projection that shows when the cash runs out and what changes if one assumption does.',
+    logo: RunwayLogo,
+    links: [
+      { label: 'runway.danelrahmani.com', href: 'https://runway.danelrahmani.com' },
+      { label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/runway' },
+    ],
+  },
+  {
+    title: 'DeskSeek',
+    techStack: ['Tauri', 'Rust', 'React', 'TypeScript'],
+    description:
+      'A lightweight desktop client for DeepSeek and any OpenAI- or Anthropic-compatible endpoint: streaming chat with a persistent memory profile, plus a coding agent that works inside a folder you trust. API keys stay in the OS keychain.',
+    logo: DeskSeekLogo,
+    links: [{ label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/deskseek' }],
   },
   {
     title: 'CraftyOS',
@@ -97,20 +124,14 @@ export const MyCurrentProjects: Project[] = [
     description:
       'Turns any spare PC into a Minecraft hosting appliance: a self-hosted server manager with a web panel, automatic Java, backups to the cloud and remote access.',
     logo: CraftyOSLogo,
-    link: {
-      label: 'GitHub Repository',
-      href: 'https://github.com/DanelRahmani/craftyos',
-    },
+    links: [{ label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/craftyos' }],
   },
   {
     title: 'My personal website',
     techStack: ['NodeJS', 'React', 'TypeScript','Notion','DNS management'],
     description: 'My personal website on the internet.',
     logo: MyWebsite,
-    link: {
-      label: 'GitHub Repository',
-      href: 'https://github.com/DanelRahmani/danelrahmani.com',
-    },
+    links: [{ label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/danelrahmani.com' }],
   },
 ];
 
