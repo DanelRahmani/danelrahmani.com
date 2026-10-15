@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 import { Badge } from './Badge';
+import { GitHubIcon } from './icons/GitHubIcon';
 import { LinkIcon } from './icons/LinkIcon';
 import { Project } from '../data/lifeApi';
 
@@ -26,13 +26,23 @@ export const ProjectCard = ({ project }: { project: Project }) => (
       ))}
     </p>
     <div className="relative z-10 mt-auto flex pt-4 text-sm font-medium text-stone-500 transition group-hover:text-primary dark:text-zinc-300 dark:group-hover:text-dark-accent">
-      {project.link ? (
-        <p className="flex items-center">
-          <LinkIcon className="h-6 w-6 flex-none" />
-          <Link href={project.link.href} className="ml-2">
-            {project.link.label}
-          </Link>
-        </p>
+      {project.links?.length ? (
+        <ul className="flex flex-col gap-2">
+          {project.links.map((link) => (
+            <li key={link.href} className="flex items-center">
+              {link.href.startsWith('https://github.com/') ? (
+                <span className="flex h-6 w-6 flex-none items-center justify-center">
+                  <GitHubIcon className="h-4 w-4 fill-current" />
+                </span>
+              ) : (
+                <LinkIcon className="h-6 w-6 flex-none" />
+              )}
+              <a href={link.href} target="_blank" rel="noopener noreferrer" className="ml-2">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       ) : null}
     </div>
   </div>
