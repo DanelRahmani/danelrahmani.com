@@ -155,7 +155,8 @@ export default function AboutMe() {
             <Section>
               <Section.Title as="h2">Photos</Section.Title>
               <Section.Content>
-                When I travel I take pictures: Tokyo, Kyoto and Osaka, CERN, Geneva and Bern, and
+                When I travel I take pictures: Tokyo, Kyoto and Osaka, Sydney and the Blue Mountains,
+                CERN, Geneva and Bern, and
                 the occasional cat. The full set lives on the{' '}
                 <Link
                   href="/images"

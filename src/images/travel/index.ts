@@ -1,4 +1,6 @@
 // src/images/travel/index.ts
+import { StaticImageData } from 'next/image';
+
 import akihabara1 from './Akihabara1.jpg';
 import akihabara2 from './Akihabara2.jpg';
 import akihabara3 from './Akihabara3.jpg';
@@ -49,12 +51,101 @@ import unCouncilRoom from './UnCouncilRoom.jpg';
 import unFlags from './UnFlags.jpg';
 import unPalaisDesNations from './UnPalaisDesNations.jpg';
 import unPalaisEntrance from './UnPalaisEntrance.jpg';
+import akihabara4 from './Akihabara4.jpg';
+import blueMountains from './BlueMountains.jpg';
+import bondiBeach from './BondiBeach.jpg';
+import illawarraCoast from './IllawarraCoast.jpg';
+import sensojiHozomon from './SensojiHozomon.jpg';
+import sensojiNakamise from './SensojiNakamise.jpg';
+import sydneyCircularQuay from './SydneyCircularQuay.jpg';
+import sydneyHarbour from './SydneyHarbour.jpg';
+import sydneyOperaHouse1 from './SydneyOperaHouse1.jpg';
+import sydneyOperaHouse2 from './SydneyOperaHouse2.jpg';
+import sydneyStMarys from './SydneyStMarys.jpg';
+import threeSisters from './ThreeSisters.jpg';
+
+type TravelImage = { img: StaticImageData; title: string; alt: string };
 
 /**
- * Every photo, shown in full on /images. Ordered so neighbouring photos come from different
- * places, since the collage is read as one field rather than in runs.
+ * Photos from Australia and Tokyo, added in November 2026. They are woven
+ * evenly through the older set below (see `weave`) so the newest trip is
+ * spread across the collage instead of sitting in one block. Ordered here so
+ * consecutive entries come from different places.
  */
-export const travelImages = [
+const recentImages: TravelImage[] = [
+  {
+    img: sydneyOperaHouse1,
+    title: 'Sydney Opera House (Australia)',
+    alt: 'The Sydney Opera House on Bennelong Point, seen from above the harbour',
+  },
+  {
+    img: sensojiNakamise,
+    title: 'Nakamise-dori, Asakusa, Tokyo (Japan)',
+    alt: 'A crowded Nakamise shopping street leading to the Hozomon gate of Senso-ji, framed by red maple leaves',
+  },
+  {
+    img: threeSisters,
+    title: 'Three Sisters, Blue Mountains (Australia)',
+    alt: 'The Three Sisters sandstone pillars above the Jamison Valley',
+  },
+  {
+    img: sydneyHarbour,
+    title: 'Sydney Harbour (Australia)',
+    alt: 'The Opera House, the city skyline and the Harbour Bridge across the water',
+  },
+  {
+    img: sensojiHozomon,
+    title: 'Senso-ji, Asakusa, Tokyo (Japan)',
+    alt: 'The Hozomon gate and five-storey pagoda of Senso-ji in evening light',
+  },
+  {
+    img: bondiBeach,
+    title: 'Bondi Beach, Sydney (Australia)',
+    alt: 'Waves rolling onto Bondi Beach with the northern headland beyond',
+  },
+  {
+    img: sydneyStMarys,
+    title: "St Mary's Cathedral, Sydney (Australia)",
+    alt: "The twin sandstone spires of St Mary's Cathedral under a grey sky",
+  },
+  {
+    img: akihabara4,
+    title: 'Akihabara, Tokyo (Japan)',
+    alt: 'Rooftop view over the signs and towers of Akihabara',
+  },
+  {
+    img: illawarraCoast,
+    title: 'Illawarra Coast (Australia)',
+    alt: 'A grassy clifftop looking south along the coast under heavy cloud',
+  },
+  {
+    img: sydneyOperaHouse2,
+    title: 'Sydney Opera House (Australia)',
+    alt: 'The tiled sails of the Sydney Opera House from the forecourt',
+  },
+  {
+    img: blueMountains,
+    title: 'Blue Mountains (Australia)',
+    alt: 'Forested ridges and sandstone cliffs across the Jamison Valley',
+  },
+  {
+    img: sydneyCircularQuay,
+    title: 'Circular Quay, Sydney (Australia)',
+    alt: 'Ferries docked at Circular Quay beneath the city towers',
+  },
+];
+
+/** Spreads `added` evenly through `base`, keeping both in their own order. */
+const weave = (base: TravelImage[], added: TravelImage[]): TravelImage[] => {
+  const result = [...base];
+  const step = (base.length + added.length) / added.length;
+  added.forEach((item, index) => {
+    result.splice(Math.min(result.length, Math.round(index * step) + 1), 0, item);
+  });
+  return result;
+};
+
+const earlierImages: TravelImage[] = [
   { img: skytree1, title: 'Tokyo Skytree (Japan)', alt: 'The Tokyo Skytree tower' },
   {
     img: unFlags,
@@ -228,13 +319,21 @@ export const travelImages = [
 ];
 
 /**
+ * Every photo, shown in full on /images. Ordered so neighbouring photos come from different
+ * places, since the collage is read as one field rather than in runs.
+ */
+export const travelImages: TravelImage[] = weave(earlierImages, recentImages);
+
+/**
  * The homepage strip crops each photo into a tall 9:10 card, which butchers a landscape shot.
  * These are the upright ones, picked to span the places rather than dwell on one — the wide
  * photographs live on /images, where nothing is cropped.
  */
 export const homeImages = [
   travelImages.find((i) => i.img === skytree1)!,
+  travelImages.find((i) => i.img === sydneyStMarys)!,
   travelImages.find((i) => i.img === unFlags)!,
+  travelImages.find((i) => i.img === sensojiNakamise)!,
   travelImages.find((i) => i.img === inari1)!,
   travelImages.find((i) => i.img === bernMinster)!,
   travelImages.find((i) => i.img === akihabara1)!,

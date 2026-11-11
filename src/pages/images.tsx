@@ -9,7 +9,7 @@ import { travelImages } from '../images/travel';
 import { buildOpenGraphUrl } from '../lib/og';
 
 const seoTitle = 'Images';
-const seoDescription = 'Photos from Japan, Switzerland and closer to home.';
+const seoDescription = 'Photos from Japan, Australia, Switzerland and closer to home.';
 
 export default function Images() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -26,7 +26,7 @@ export default function Images() {
       />
       <PageLayout
         title="Images"
-        intro="Photos I have taken along the way: Tokyo, Kyoto and Osaka, CERN, Geneva and Bern, and the occasional cat. Click any of them to see it larger."
+        intro="Photos I have taken along the way: Tokyo, Kyoto and Osaka, Sydney and the Blue Mountains, CERN, Geneva and Bern, and the occasional cat. Click any of them to see it larger."
       >
         {/* A columns masonry: every photo keeps its own aspect ratio, so the wide shots and the
             upright ones both appear whole rather than cropped to a common shape. */}
