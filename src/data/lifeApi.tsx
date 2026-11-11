@@ -15,6 +15,7 @@ import CraftyOSLogo from '../images/logos/craftyos.svg';
 import EconoSimLogo from '../images/logos/econosim.svg';
 import RunwayLogo from '../images/logos/runway.svg';
 import DeskSeekLogo from '../images/logos/deskseek.png';
+import { education, experience } from './resume';
 
 export const Name = 'Danel Rahmani';
 
@@ -156,22 +157,20 @@ export const SocialMedia = [
   { name: 'LinkedIn', link: 'https://www.linkedin.com/in/danelrahmani', icon: LinkedInIcon },
 ] as const;
 
-export const Work = [
-  {
-    company: 'Axiom Digital',
-    title: 'Founder',
-    logo: AxiomDigitalLogo,
-    start: 'Jul 2026',
-    end: 'Present',
-  },
-  {
-    company: "Rahmani's Gordijn Kledingatelier",
-    title: 'Employee',
-    logo: RahmaniLogo,
-    start: 'Sep 2020',
-    end: 'Present',
-  },
-] as const;
+// The start-page ledger cards are derived from the résumé data so the two
+// can never disagree. Logos live here because resume.ts stays image-free.
+const WorkLogos: Record<string, any> = {
+  'axiom-digital': AxiomDigitalLogo,
+  atelier: RahmaniLogo,
+};
+
+export const Work = experience.map((role) => ({
+  company: role.title,
+  title: role.subtitle,
+  logo: WorkLogos[role.id],
+  start: role.start,
+  end: role.end,
+}));
 
 type EducationEntry = {
   school: string;
@@ -181,34 +180,13 @@ type EducationEntry = {
   distinction?: string;
 };
 
-export const Education: readonly EducationEntry[] = [
-  {
-    school: 'Waseda University',
-    degree: 'Exchange, School of Political Science and Economics',
-    start: 'Sep 2026',
-    end: 'Feb 2027',
-  },
-  {
-    school: 'University of Groningen',
-    degree: 'Honours College',
-    start: 'Apr 2025',
-    end: 'Jul 2027',
-  },
-  {
-    school: 'University of Groningen',
-    degree: 'BSc International Business',
-    start: '2024',
-    end: '2027',
-    distinction: 'GPA: 9.25 (Year 1) · 9.00 (Year 2)',
-  },
-  {
-    school: 'Rsg De Borgen',
-    degree: 'VWO, E&M Profiel',
-    start: 'Sep 2018',
-    end: 'Jul 2024',
-    distinction: 'Graduated Cum Laude',
-  },
-] as const;
+export const Education: readonly EducationEntry[] = education.map((entry) => ({
+  school: entry.title,
+  degree: entry.subtitle,
+  start: entry.start,
+  end: entry.end,
+  distinction: entry.note,
+}));
 
 export const CompaniesLinks = [
   {
