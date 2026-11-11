@@ -21,10 +21,11 @@ export const Name = 'Danel Rahmani';
 
 export const About = (
   <>
-    I&apos;m the founder of{' '}
-    <ExternalLink href="https://axiomdigital.nl">Axiom Digital</ExternalLink>, a digital agency
-    helping businesses put AI and digital transformation to work. By day I study International
-    Business in Groningen; this September I&apos;m off to Waseda, Tokyo.
+    I study International Business at the University of Groningen and am spending this year at
+    Waseda University in Tokyo, where I focus on finance and economics. I have kept the books of
+    my family&apos;s atelier since 2020, and I founded{' '}
+    <ExternalLink href="https://axiomdigital.nl">Axiom Digital</ExternalLink>. I am looking for a
+    summer 2027 internship in corporate finance, M&amp;A or asset management.
   </>
 );
 

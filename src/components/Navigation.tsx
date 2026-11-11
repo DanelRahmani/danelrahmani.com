@@ -10,6 +10,7 @@ import { CloseIcon } from './icons/CloseIcon';
 
 export const NavigationItems = [
   { name: 'Home',     href: '/',         type: 'internal' },
+  { name: 'Résumé',   href: '/resume',   type: 'internal' },
   { name: 'Notes',    href: '/notes',    type: 'internal' },
   { name: 'Projects', href: '/projects', type: 'internal' },
   { name: 'Images',   href: '/images',   type: 'internal' },

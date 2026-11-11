@@ -23,7 +23,7 @@ export const ReadingThread = ({ target }: { target: RefObject<HTMLElement> }) =>
   const clip = useMotionTemplate`inset(0 0 ${remaining}% 0)`;
 
   return (
-    <div aria-hidden="true" className="absolute -left-8 top-0 bottom-0 hidden lg:block">
+    <div aria-hidden="true" className="no-print absolute -left-8 top-0 bottom-0 hidden lg:block">
       {reduceMotion ? (
         <div className="seam-l h-full w-0" />
       ) : (

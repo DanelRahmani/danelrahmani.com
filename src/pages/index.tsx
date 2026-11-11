@@ -29,7 +29,7 @@ const heroEnter = (delay: number) => ({
 
 const seoTitle = 'Danel Rahmani';
 const seoDescription =
-  'Founder of Axiom Digital. International Business student at the University of Groningen, heading to Waseda.';
+  'International Business student at the University of Groningen, on exchange at Waseda University in Tokyo. Founder of Axiom Digital.';
 
 type Props = {
   latestNotes: Note[];
@@ -43,7 +43,11 @@ const personJsonLd = JSON.stringify({
   name: 'Danel Rahmani',
   url: process.env.NEXT_PUBLIC_URL,
   email: 'mailto:danelrahmani@outlook.com',
-  jobTitle: 'Founder',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Groningen',
+    addressCountry: 'NL',
+  },
   worksFor: {
     '@type': 'Organization',
     name: 'Axiom Digital',
@@ -91,15 +95,30 @@ export default function Home({ latestNotes }: Props) {
           <motion.p {...heroEnter(0.15)} className="mt-6 max-w-2xl text-base text-balance">
             {About}
           </motion.p>
+          <motion.p
+            {...heroEnter(0.2)}
+            className="mt-4 font-mono text-xs text-stone-600 dark:text-stone-400"
+          >
+            Based in Groningen. Willing to relocate.
+          </motion.p>
           <motion.div
             {...heroEnter(0.25)}
-            className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4"
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4"
           >
             <MagneticButton>
-              <Button as="a" href={AxiomDigital.href} target="_blank" rel="noopener noreferrer">
-                Work with me
+              <Button as={Link} href="/resume">
+                Résumé
               </Button>
             </MagneticButton>
+            <Button
+              as="a"
+              variant="secondary"
+              href={AxiomDigital.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Axiom Digital
+            </Button>
             <ul role="list" className="flex gap-6">
               {SocialMedia.map((socialProfile) => (
                 <SocialLink
@@ -174,6 +193,12 @@ export default function Home({ latestNotes }: Props) {
           </div>
           <div className="lg:ml-auto space-y-10 lg:pl-16 xl:pl-24">
             <Resume />
+            <Link
+              href="/resume"
+              className="link-thread inline-block text-sm font-medium text-primary dark:text-dark-accent"
+            >
+              Full résumé
+            </Link>
           </div>
         </div>
       </Container>

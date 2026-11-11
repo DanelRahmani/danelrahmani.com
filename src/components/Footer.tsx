@@ -23,6 +23,14 @@ export const Footer = () => {
                   </NavLink>
                 ))}
                 <a
+                  href="https://axiomdigital.nl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-thread transition hover:text-primary dark:hover:text-dark-accent"
+                >
+                  Axiom Digital
+                </a>
+                <a
                   href="mailto:danelrahmani@outlook.com"
                   className="link-thread transition hover:text-primary dark:hover:text-dark-accent"
                 >

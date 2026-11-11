@@ -157,6 +157,66 @@ html.dark {
   background-size: 100% 1px;
 }
 
+/* ── Print: the résumé page as a clean black-on-white document ──
+   Every unfolding row is forced open, scroll-triggered entrances are
+   forced to their final state (rows below the fold would otherwise print
+   invisible), and site chrome is dropped. */
+@media print {
+  header:not(.resume-header),
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body,
+  .panel {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  main * {
+    color: #000 !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .resume-panel {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  /* Everything is rem-based, so shrinking the root scales the whole page
+     to a document density. Rows may split across pages (tall ones would
+     otherwise each claim a page); headings stay with what follows. */
+  html {
+    font-size: 11.5px;
+  }
+  .resume-section {
+    margin-top: 1.75rem !important;
+  }
+  .resume-section h2,
+  .resume-row > button,
+  .resume-row > div:first-child {
+    break-after: avoid;
+  }
+  .resume-section h2 + hr {
+    break-after: avoid;
+  }
+  .resume-panel li,
+  .resume-section li:not(.resume-row) {
+    break-inside: avoid;
+  }
+  a {
+    text-decoration: none !important;
+  }
+  @page {
+    margin: 16mm;
+  }
+}
+
 /* ── Reduced motion: collapse every CSS animation and transition ── */
 @media (prefers-reduced-motion: reduce) {
   *,

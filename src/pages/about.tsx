@@ -69,14 +69,12 @@ export default function AboutMe() {
                   icon={MailIcon}
                 />
               </ul>
-              <a
-                href="/assets/resume.pdf"
-                download
-                aria-label="Download resume"
+              <Link
+                href="/resume"
                 className="inline-flex items-center rounded-md px-3 py-1 text-sm font-medium text-white bg-primary hover:bg-primary-light dark:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition"
               >
-                Resume
-              </a>
+                Résumé
+              </Link>
             </div>
             <Section>
               <Section.Title as="h2">Now</Section.Title>
@@ -86,16 +84,25 @@ export default function AboutMe() {
                 agency focused on AI integration and digital transformation. I help businesses work
                 out where AI and automation actually pay off, then build and deliver it. If that
                 sounds useful to you,{' '}
-                <ExternalLink href="https://axiomdigital.nl">work with me</ExternalLink>.
+                <ExternalLink href="https://axiomdigital.nl">work with me</ExternalLink>. I am also
+                looking for a summer 2027 internship in corporate finance, M&amp;A or asset
+                management. I am based in Groningen and willing to relocate.
               </Section.Content>
             </Section>
             <Section>
               <Section.Title as="h2">Study</Section.Title>
               <Section.Content>
                 I study International Business at the University of Groningen (2024-2027), where I
-                am also part of the Honours College. My GPA so far: 9.25 in year one and 9.00 in
-                year two. This September I leave for an exchange semester at Waseda University in
-                Tokyo, at the School of Political Science and Economics.
+                am also part of the Honours College. Until March 2027 I am on exchange at Waseda
+                University in Tokyo, at the School of Political Science and Economics, studying
+                money and banking, macroeconomics and econometrics. The details are on my{' '}
+                <Link
+                  href="/resume"
+                  className="underline decoration-primary/40 underline-offset-2 transition hover:decoration-primary dark:decoration-dark-accent/50 dark:hover:decoration-dark-accent"
+                >
+                  résumé
+                </Link>
+                .
               </Section.Content>
             </Section>
             <Section>
