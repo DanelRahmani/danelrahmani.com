@@ -63,6 +63,13 @@ import sydneyOperaHouse1 from './SydneyOperaHouse1.jpg';
 import sydneyOperaHouse2 from './SydneyOperaHouse2.jpg';
 import sydneyStMarys from './SydneyStMarys.jpg';
 import threeSisters from './ThreeSisters.jpg';
+import kabukichoDusk from './KabukichoDusk.jpg';
+import kabukichoNight from './KabukichoNight.jpg';
+import omoideYokocho from './OmoideYokocho.jpg';
+import sensojiMainHall from './SensojiMainHall.jpg';
+import shinjukuGodzilla from './ShinjukuGodzilla.jpg';
+import shinjukuRain from './ShinjukuRain.jpg';
+import tokyoSunset from './TokyoSunset.jpg';
 
 type TravelImage = { img: StaticImageData; title: string; alt: string };
 
@@ -74,6 +81,11 @@ type TravelImage = { img: StaticImageData; title: string; alt: string };
  */
 const recentImages: TravelImage[] = [
   {
+    img: omoideYokocho,
+    title: 'Omoide Yokocho, Shinjuku, Tokyo (Japan)',
+    alt: 'A narrow alley in the rain, hung with red lanterns and autumn maple leaves',
+  },
+  {
     img: sydneyOperaHouse1,
     title: 'Sydney Opera House (Australia)',
     alt: 'The Sydney Opera House on Bennelong Point, seen from above the harbour',
@@ -82,6 +94,11 @@ const recentImages: TravelImage[] = [
     img: sensojiNakamise,
     title: 'Nakamise-dori, Asakusa, Tokyo (Japan)',
     alt: 'A crowded Nakamise shopping street leading to the Hozomon gate of Senso-ji, framed by red maple leaves',
+  },
+  {
+    img: kabukichoDusk,
+    title: 'Kabukicho, Shinjuku, Tokyo (Japan)',
+    alt: 'Billboards and neon signs lighting up over Kabukicho at dusk',
   },
   {
     img: threeSisters,
@@ -99,9 +116,19 @@ const recentImages: TravelImage[] = [
     alt: 'The Hozomon gate and five-storey pagoda of Senso-ji in evening light',
   },
   {
+    img: tokyoSunset,
+    title: 'Sunset, Tokyo (Japan)',
+    alt: 'A pink and violet sunset behind bare trees and power lines on a quiet street',
+  },
+  {
     img: bondiBeach,
     title: 'Bondi Beach, Sydney (Australia)',
     alt: 'Waves rolling onto Bondi Beach with the northern headland beyond',
+  },
+  {
+    img: shinjukuGodzilla,
+    title: 'Godzilla, Shinjuku, Tokyo (Japan)',
+    alt: 'The Godzilla head peering over a rooftop in Kabukicho',
   },
   {
     img: sydneyStMarys,
@@ -114,6 +141,11 @@ const recentImages: TravelImage[] = [
     alt: 'Rooftop view over the signs and towers of Akihabara',
   },
   {
+    img: sensojiMainHall,
+    title: 'Senso-ji Main Hall, Asakusa, Tokyo (Japan)',
+    alt: 'The red main hall of Senso-ji glowing in low evening sun',
+  },
+  {
     img: illawarraCoast,
     title: 'Illawarra Coast (Australia)',
     alt: 'A grassy clifftop looking south along the coast under heavy cloud',
@@ -124,9 +156,19 @@ const recentImages: TravelImage[] = [
     alt: 'The tiled sails of the Sydney Opera House from the forecourt',
   },
   {
+    img: shinjukuRain,
+    title: 'Shinjuku in the Rain, Tokyo (Japan)',
+    alt: 'A wet Shinjuku street at dusk, neon signs reflected on the pavement',
+  },
+  {
     img: blueMountains,
     title: 'Blue Mountains (Australia)',
     alt: 'Forested ridges and sandstone cliffs across the Jamison Valley',
+  },
+  {
+    img: kabukichoNight,
+    title: 'Kabukicho at Night, Tokyo (Japan)',
+    alt: 'Giant illustrated billboards and red neon above a crowded crossing in Kabukicho',
   },
   {
     img: sydneyCircularQuay,
@@ -331,6 +373,7 @@ export const travelImages: TravelImage[] = weave(earlierImages, recentImages);
  */
 export const homeImages = [
   travelImages.find((i) => i.img === skytree1)!,
+  travelImages.find((i) => i.img === omoideYokocho)!,
   travelImages.find((i) => i.img === sydneyStMarys)!,
   travelImages.find((i) => i.img === unFlags)!,
   travelImages.find((i) => i.img === sensojiNakamise)!,
