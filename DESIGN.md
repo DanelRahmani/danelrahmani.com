@@ -32,6 +32,9 @@ Rules: never gray-on-creme below 4.5:1; hairlines are tinted toward the accent h
 - `Card` (`src/components/Card.tsx`) — flat, no nesting; hover = background tint + hairline, not scale-everything.
 - `Photos` — horizontal contact-sheet strip, snap-scroll, framer-motion captions; full set at `/images` with lightbox.
 - `NotePreview`, `Resume`, `ProjectCard`, `Badge` (tag pills), `Navigation` (glass pill — the one sanctioned glass surface).
+- `ResumeRow` / `ResumeSection` / `LanguageList` (`src/components/resume/`) — the `/resume` page: rows that unfold on click, language greetings on hover or focus, a scroll-driven `ReadingThread`.
+- `ProjectFilter` — category chips above the projects grid; the active chip carries the dashed thread.
+- `Lightbox` — full-screen photo viewer shared by `/images` and the home strip.
 - Icons: existing hand-rolled SVG set in `src/components/icons/`.
 
 ## Layout
@@ -44,7 +47,7 @@ Rules: never gray-on-creme below 4.5:1; hairlines are tinted toward the accent h
 
 - Library: framer-motion (installed). Energy: low — "barely seen, perfectly finished."
 - Durations 150–250ms UI, ≤ 500ms entrances; easing ease-out (quart/expo), springs only where physical (lightbox), no bounce.
-- One orchestrated moment per page max (home: name + photo strip settle). Link hover: underline draw in accent. Cards: tint/shadow, never uniform scale.
+- One orchestrated entrance per page (home: name + photo strip settle), plus interactions that respond to the reader (hover, click, scroll position). Nothing loops or plays unprompted after the entrance. Link hover: underline draw in accent. Cards: tint/shadow and a stitched outline, never uniform scale.
 - Every animation has a `prefers-reduced-motion` alternative (crossfade or none).
 
 ## Voice

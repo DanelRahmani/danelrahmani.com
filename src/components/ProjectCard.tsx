@@ -7,8 +7,12 @@ import { LinkIcon } from './icons/LinkIcon';
 import { Project } from '../data/lifeApi';
 
 export const ProjectCard = ({ project }: { project: Project }) => (
-  <div className="card-hover panel group relative flex flex-col rounded-2xl border border-primary/10 p-6 dark:border-zinc-700/40">
-    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-100 bg-white shadow-md shadow-zinc-800/5 dark:border-zinc-700/40 dark:bg-zinc-800">
+  <div className="card-hover panel group relative flex w-full flex-col rounded-2xl border border-primary/10 p-6 dark:border-stone-700/40">
+    {/* A basting stitch sews itself around the card on hover or focus. */}
+    <svg aria-hidden="true" className="card-stitch pointer-events-none absolute inset-0 h-full w-full">
+      <rect x="1" y="1" rx="15" />
+    </svg>
+    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-stone-100 bg-white shadow-md shadow-zinc-800/5 dark:border-stone-700/40 dark:bg-zinc-800">
       <Image
         src={project.logo}
         alt={project.title}
@@ -18,14 +22,14 @@ export const ProjectCard = ({ project }: { project: Project }) => (
         unoptimized
       />
     </div>
-    <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">{project.title}</h2>
-    <p className="relative z-10 mt-2 text-sm text-stone-600 dark:text-zinc-400">{project.description}</p>
+    <h2 className="mt-6 text-base font-semibold text-stone-800 dark:text-stone-100">{project.title}</h2>
+    <p className="relative z-10 mt-2 text-sm text-stone-600 dark:text-stone-400">{project.description}</p>
     <p className="relative z-10 mt-4 flex flex-wrap gap-1">
       {project.techStack.map((techStackItem) => (
         <Badge key={techStackItem}>{techStackItem}</Badge>
       ))}
     </p>
-    <div className="relative z-10 mt-auto flex pt-4 text-sm font-medium text-stone-500 transition group-hover:text-primary dark:text-zinc-300 dark:group-hover:text-dark-accent">
+    <div className="relative z-10 mt-auto flex pt-4 text-sm font-medium text-stone-500 transition group-hover:text-primary dark:text-stone-300 dark:group-hover:text-dark-accent">
       {project.links?.length ? (
         <ul className="flex flex-col gap-2">
           {project.links.map((link) => (

@@ -24,16 +24,16 @@ export const Resume = () => {
     <div className="max-w-[420px] space-y-6">
       <motion.div
         {...ledgerEnter(0)}
-        className="card-shadow panel rounded-2xl border border-primary/10 p-6 dark:border-zinc-700/40"
+        className="card-shadow panel rounded-2xl border border-primary/10 p-6 dark:border-stone-700/40"
       >
-        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <h2 className="flex text-sm font-semibold text-stone-900 dark:text-stone-100">
           <BriefcaseIcon className="h-6 w-6 flex-none" />
           <span className="ml-3">Work</span>
         </h2>
         <ol className="mt-6 space-y-4">
           {Work.map((role, roleIndex) => (
             <li key={roleIndex} className="flex gap-4">
-              <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 border border-zinc-200 dark:border-zinc-700/40 bg-zinc-50 dark:bg-zinc-800/40">
+              <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 border border-stone-200 dark:border-stone-700/40 bg-zinc-50 dark:bg-zinc-800/40">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white overflow-hidden">
                   <Image
                     src={role.logo}
@@ -46,19 +46,19 @@ export const Resume = () => {
               </div>
               <dl className="flex flex-auto flex-wrap items-baseline gap-x-2">
                 <dt className="sr-only">Company</dt>
-                <dd className="min-w-0 flex-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <dd className="min-w-0 flex-1 text-sm font-medium text-stone-900 dark:text-stone-100">
                   {role.company}
                 </dd>
                 <dt className="sr-only">Date</dt>
                 <dd
-                  className="ml-auto flex-none whitespace-nowrap font-mono text-xs tabular-nums text-stone-500 dark:text-zinc-400"
+                  className="ml-auto flex-none whitespace-nowrap font-mono text-xs tabular-nums text-stone-500 dark:text-stone-400"
                   aria-label={`${role.start} until ${role.end}`}
                 >
                   <time dateTime={role.start}>{role.start}</time> <span aria-hidden="true">-</span>{' '}
                   <time dateTime={role.end}>{role.end}</time>
                 </dd>
                 <dt className="sr-only">Role</dt>
-                <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400">{role.title}</dd>
+                <dd className="w-full text-xs text-stone-500 dark:text-stone-400">{role.title}</dd>
               </dl>
             </li>
           ))}
@@ -67,9 +67,9 @@ export const Resume = () => {
 
       <motion.div
         {...ledgerEnter(0.12)}
-        className="card-shadow panel rounded-2xl border border-primary/10 p-6 dark:border-zinc-700/40"
+        className="card-shadow panel rounded-2xl border border-primary/10 p-6 dark:border-stone-700/40"
       >
-        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <h2 className="flex text-sm font-semibold text-stone-900 dark:text-stone-100">
           <AcademicCapIcon className="h-6 w-6 flex-none" />
           <span className="ml-3">Education</span>
         </h2>
@@ -78,19 +78,19 @@ export const Resume = () => {
             <li key={index} className="flex gap-4">
               <dl className="flex flex-auto flex-wrap items-baseline gap-x-2">
                 <dt className="sr-only">School</dt>
-                <dd className="min-w-0 flex-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <dd className="min-w-0 flex-1 text-sm font-medium text-stone-900 dark:text-stone-100">
                   {entry.school}
                 </dd>
                 <dt className="sr-only">Date</dt>
                 <dd
-                  className="ml-auto flex-none whitespace-nowrap font-mono text-xs tabular-nums text-stone-500 dark:text-zinc-400"
+                  className="ml-auto flex-none whitespace-nowrap font-mono text-xs tabular-nums text-stone-500 dark:text-stone-400"
                   aria-label={`${entry.start} until ${entry.end}`}
                 >
                   <time dateTime={entry.start}>{entry.start}</time> <span aria-hidden="true">-</span>{' '}
                   <time dateTime={entry.end}>{entry.end}</time>
                 </dd>
                 <dt className="sr-only">Degree</dt>
-                <dd className="w-full text-xs text-zinc-500 dark:text-zinc-400">{entry.degree}</dd>
+                <dd className="w-full text-xs text-stone-500 dark:text-stone-400">{entry.degree}</dd>
                 {entry.distinction && (
                   <>
                     <dt className="sr-only">Distinction</dt>

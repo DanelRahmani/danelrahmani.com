@@ -144,6 +144,35 @@ html.dark {
   }
 }
 
+/* ── Stitched card outline: the basting stitch appears around a project
+      card on hover or keyboard focus, its dashes pulling through as it
+      settles. The reduced-motion block below collapses the transition. ── */
+:root {
+  --stitch-color: rgba(74, 14, 14, 0.75);
+}
+html.dark {
+  --stitch-color: rgba(212, 61, 85, 0.85);
+}
+.card-stitch rect {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  fill: none;
+  stroke: var(--stitch-color);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 9 7;
+  stroke-dashoffset: 32;
+  opacity: 0;
+  transition:
+    opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    stroke-dashoffset 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover > .card-stitch rect,
+.group:focus-within > .card-stitch rect {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
 /* ── Thread underline for links: draws in from the left on hover ── */
 .link-thread {
   background-image: linear-gradient(currentColor, currentColor);

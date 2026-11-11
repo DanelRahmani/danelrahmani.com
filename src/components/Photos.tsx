@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { homeImages, travelImages } from '../images/travel';
+import { Lightbox } from './Lightbox';
 
 const ChevronIcon = ({ direction }: { direction: 'left' | 'right' }) => (
   <svg
@@ -27,16 +28,23 @@ const Photo = ({
   title,
   alt,
   idx,
+  onOpen,
 }: {
   img: StaticImageData;
   title: string;
   alt: string;
   idx: number;
+  onOpen: (trigger: HTMLButtonElement) => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
+      aria-label={`View ${title} larger`}
+      onClick={(event) => onOpen(event.currentTarget)}
+      onFocus={() => setIsVisible(true)}
+      onBlur={() => setIsVisible(false)}
       key={img.src}
       initial={{ opacity: 0, y: 20, scale: 0.97 }}
       whileHover={{ scale: 1.03, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
@@ -56,12 +64,14 @@ const Photo = ({
       onHoverStart={() => setIsVisible(true)}
       onHoverEnd={() => setIsVisible(false)}
       className={clsx(
-        'relative aspect-[9/10] w-44 flex-none snap-start overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800',
+        'relative block aspect-[9/10] w-44 flex-none snap-start overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-creme dark:focus-visible:ring-dark-accent dark:focus-visible:ring-offset-dark-bg',
       )}
     >
       <Image
         src={img}
         alt={alt}
+        draggable={false}
         sizes="(min-width: 640px) 18rem, 11rem"
         className="absolute inset-0 h-full w-full object-cover"
         placeholder="blur"
@@ -76,11 +86,13 @@ const Photo = ({
           >
             {/* The overlay is dark in both themes, so the caption is always white
                 rather than inheriting the body colour. */}
-            <h3 className="px-3 py-2 font-mono text-xs font-bold text-white">{title}</h3>
+            <span className="px-3 py-2 text-left font-mono text-xs font-bold text-white">
+              {title}
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.button>
   );
 };
 
@@ -113,6 +125,9 @@ const ScrollButton = ({
     <ChevronIcon direction={direction} />
   </button>
 );
+
+// How far the mouse must travel before a press on the strip counts as a drag.
+const DRAG_THRESHOLD_PX = 5;
 
 // One photo card plus the gap after it (w-44 + gap-8): the strip's snap interval.
 const PHOTO_STEP_PX = 176 + 32;
@@ -203,12 +218,72 @@ export const Photos = () => {
 
   useEffect(() => () => scrollAnimation.current?.stop(), []);
 
+  // ── Lightbox: a click on a photo opens it large; closing returns focus
+  // to the photo that opened it.
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const lastTrigger = useRef<HTMLButtonElement | null>(null);
+
+  const closeLightbox = useCallback(() => {
+    setOpenIndex(null);
+    lastTrigger.current?.focus();
+  }, []);
+
+  // ── Drag to scroll, for mice: press and pull the strip sideways. Touch
+  // keeps its native swipe. A pull of more than a few pixels is a drag, not
+  // a click, so it must not open the photo under the cursor.
+  const drag = useRef<{ startX: number; startLeft: number; moved: boolean } | null>(null);
+  const suppressClick = useRef(false);
+
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    const el = scrollerRef.current;
+    if (!el) return;
+    scrollAnimation.current?.stop();
+    drag.current = { startX: event.clientX, startLeft: el.scrollLeft, moved: false };
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!drag.current || !el) return;
+    const delta = event.clientX - drag.current.startX;
+    if (!drag.current.moved && Math.abs(delta) > DRAG_THRESHOLD_PX) {
+      drag.current.moved = true;
+      el.style.scrollSnapType = 'none';
+      el.style.cursor = 'grabbing';
+    }
+    if (drag.current.moved) el.scrollLeft = drag.current.startLeft - delta;
+  };
+
+  const endDrag = () => {
+    const el = scrollerRef.current;
+    if (drag.current?.moved && el) {
+      el.style.scrollSnapType = '';
+      el.style.cursor = '';
+      suppressClick.current = true;
+      // The click that follows pointerup fires before this timer.
+      window.setTimeout(() => {
+        suppressClick.current = false;
+      }, 0);
+    }
+    drag.current = null;
+  };
+
+  const openPhoto = (index: number, trigger: HTMLButtonElement) => {
+    if (suppressClick.current) return;
+    lastTrigger.current = trigger;
+    setOpenIndex(index);
+  };
+
   return (
     <div className="relative my-8">
       <div
         ref={scrollerRef}
         onScroll={updateScrollState}
-        className="hide-scrollbar -my-4 flex snap-x snap-mandatory scroll-px-8 gap-8 overflow-x-auto overflow-y-hidden py-4 px-8"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        className="hide-scrollbar -my-4 flex cursor-grab select-none snap-x snap-mandatory scroll-px-8 gap-8 overflow-x-auto overflow-y-hidden py-4 px-8"
       >
         {photos.map((travelImage, index) => (
           <Photo
@@ -217,6 +292,7 @@ export const Photos = () => {
             title={travelImage.title}
             alt={travelImage.alt}
             idx={index}
+            onOpen={(trigger) => openPhoto(index, trigger)}
           />
         ))}
 
@@ -230,12 +306,12 @@ export const Photos = () => {
             >
               <Link
                 href="/images"
-                className="group flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-zinc-300 text-center transition hover:border-primary dark:border-zinc-700 dark:hover:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="group flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-stone-300 text-center transition hover:border-primary dark:border-stone-700 dark:hover:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
-                <span className="font-mono text-xs font-bold text-zinc-600 transition group-hover:text-primary dark:text-zinc-300">
+                <span className="font-mono text-xs font-bold text-stone-600 transition group-hover:text-primary dark:text-stone-300">
                   See more
                 </span>
-                <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                <span className="text-xs text-stone-500 dark:text-stone-400">
                   All {travelImages.length} photos
                 </span>
               </Link>
@@ -248,6 +324,17 @@ export const Photos = () => {
         <ScrollButton direction="left" disabled={!canScrollLeft} onClick={() => scroll('left')} />
         <ScrollButton direction="right" disabled={!canScrollRight} onClick={() => scroll('right')} />
       </div>
+
+      <AnimatePresence>
+        {openIndex !== null && (
+          <Lightbox
+            photos={photos}
+            index={openIndex}
+            onClose={closeLightbox}
+            onNavigate={setOpenIndex}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
