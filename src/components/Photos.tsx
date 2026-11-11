@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, animate, motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -10,7 +10,7 @@ const ChevronIcon = ({ direction }: { direction: 'left' | 'right' }) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
-    className="h-5 w-5 stroke-zinc-500 group-hover:stroke-primary dark:stroke-zinc-400"
+    className="h-5 w-5 stroke-primary transition-transform duration-200 group-hover:scale-110 dark:stroke-dark-accent"
   >
     <path
       d={direction === 'left' ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'}
@@ -99,16 +99,23 @@ const ScrollButton = ({
     disabled={disabled}
     aria-label={direction === 'left' ? 'Show previous photos' : 'Show more photos'}
     className={clsx(
-      'group pointer-events-auto hidden h-10 w-10 items-center justify-center rounded-full',
-      'bg-white/90 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur',
-      'transition hover:ring-zinc-900/10 dark:bg-zinc-800/90 dark:ring-white/10',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-      'disabled:pointer-events-none disabled:opacity-0 sm:flex',
+      // Shown wherever there is a mouse or trackpad, at any width; hidden only
+      // on touch-only devices, where swiping the strip is the natural gesture.
+      'group pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full',
+      '[@media(hover:none)_and_(pointer:coarse)]:hidden',
+      'bg-creme shadow-lg shadow-primary/20 ring-1 ring-primary/25',
+      'transition hover:ring-primary/60 active:scale-95',
+      'dark:bg-zinc-900 dark:shadow-black/40 dark:ring-dark-accent/40 dark:hover:ring-dark-accent/80',
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:focus-visible:ring-dark-accent',
+      'disabled:pointer-events-none disabled:opacity-0',
     )}
   >
     <ChevronIcon direction={direction} />
   </button>
 );
+
+// One photo card plus the gap after it (w-44 + gap-8): the strip's snap interval.
+const PHOTO_STEP_PX = 176 + 32;
 
 // How many times someone has to page right before the link to the full set appears.
 const CLICKS_BEFORE_SEE_MORE = 2;
@@ -118,6 +125,7 @@ export const Photos = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [rightClicks, setRightClicks] = useState(0);
+  const scrollAnimation = useRef<{ stop: () => void } | null>(null);
 
   const photos = homeImages;
   const showSeeMore = rightClicks >= CLICKS_BEFORE_SEE_MORE;
@@ -158,21 +166,49 @@ export const Photos = () => {
     if (direction === 'right') setRightClicks((count) => count + 1);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Advance by a viewport of photos, leaving one card visible for continuity.
-    const amount = Math.max(el.clientWidth * 0.8, 176);
+    // Advance by a viewport of photos, leaving one card visible for continuity,
+    // and land exactly on a card edge so re-enabling snap causes no jump.
+    const amount = Math.max(el.clientWidth * 0.8, PHOTO_STEP_PX);
+    const max = el.scrollWidth - el.clientWidth;
+    const raw = el.scrollLeft + (direction === 'left' ? -amount : amount);
+    const aligned = Math.round(raw / PHOTO_STEP_PX) * PHOTO_STEP_PX;
+    const target = aligned >= max - 1 ? max : Math.max(0, aligned);
 
-    el.scrollBy({
-      left: direction === 'left' ? -amount : amount,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    scrollAnimation.current?.stop();
+
+    if (prefersReducedMotion) {
+      el.scrollLeft = target;
+      return;
+    }
+
+    // Native `scrollBy({ behavior: 'smooth' })` does not move a
+    // scroll-snap-mandatory strip in Chrome, so the arrows did nothing. The
+    // scroll position is tweened by hand instead, with snapping switched off
+    // for the duration of the glide.
+    el.style.scrollSnapType = 'none';
+    scrollAnimation.current = animate(el.scrollLeft, target, {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (value) => {
+        el.scrollLeft = value;
+        // Restore snapping the moment the glide lands, rather than relying
+        // on onComplete alone, which is skipped if the tween is stopped.
+        if (value === target) el.style.scrollSnapType = '';
+      },
+      onComplete: () => {
+        el.style.scrollSnapType = '';
+      },
     });
   };
+
+  useEffect(() => () => scrollAnimation.current?.stop(), []);
 
   return (
     <div className="relative my-8">
       <div
         ref={scrollerRef}
         onScroll={updateScrollState}
-        className="hide-scrollbar -my-4 flex snap-x snap-mandatory gap-8 overflow-x-auto overflow-y-hidden py-4 px-8"
+        className="hide-scrollbar -my-4 flex snap-x snap-mandatory scroll-px-8 gap-8 overflow-x-auto overflow-y-hidden py-4 px-8"
       >
         {photos.map((travelImage, index) => (
           <Photo
