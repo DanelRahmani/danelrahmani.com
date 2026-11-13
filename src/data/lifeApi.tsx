@@ -14,6 +14,7 @@ import NihongoPathLogo from '../images/logos/nihongo-path.svg';
 import CraftyOSLogo from '../images/logos/craftyos.svg';
 import EconoSimLogo from '../images/logos/econosim.svg';
 import RunwayLogo from '../images/logos/runway.svg';
+import ValuationModelsLogo from '../images/logos/valuation-models.svg';
 import DeskSeekLogo from '../images/logos/deskseek.png';
 import { ProjectCategory } from '../lib/projects';
 import { education, experience } from './resume';
@@ -82,6 +83,18 @@ export const MyCurrentProjects: Project[] = [
     links: [
       { label: 'econosim.danelrahmani.com', href: 'https://econosim.danelrahmani.com' },
       { label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/EconoSim' },
+    ],
+  },
+  {
+    title: 'Valuation Models',
+    category: 'finance',
+    techStack: ['Next.js', 'React', 'TypeScript', 'SEC EDGAR', 'Excel'],
+    description:
+      'Eight valuation models for every S&P 500 company, built from SEC filings: DCF, APV, residual income, dividend models, multiples and a reverse DCF. Every formula is visible and the whole model exports to Excel.',
+    logo: ValuationModelsLogo,
+    links: [
+      { label: 'valuation.danelrahmani.com', href: 'https://valuation.danelrahmani.com' },
+      { label: 'GitHub Repository', href: 'https://github.com/DanelRahmani/valuation-models' },
     ],
   },
   {
