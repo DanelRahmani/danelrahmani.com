@@ -34,6 +34,7 @@ Rules: never gray-on-creme below 4.5:1; hairlines are tinted toward the accent h
 - `NotePreview`, `Resume`, `ProjectCard`, `Badge` (tag pills), `Navigation` (glass pill — the one sanctioned glass surface).
 - `ResumeRow` / `ResumeSection` / `LanguageList` (`src/components/resume/`) — the `/resume` page: rows that unfold on click, language greetings on hover or focus, a scroll-driven `ReadingThread`.
 - `ProjectFilter` — category chips above the projects grid; the active chip carries the dashed thread.
+- `ThreadSoFar` / `SelectedWork` / `Closing` / `TokyoClock` (`src/components/home/`) - the start page: a scroll-sewn milestone timeline ending on an open stitch, the finance projects as editorial rows with small responsive figures (illustrative, never real numbers), and the closing contact section. Copy lives in `src/data/home.ts`.
 - `Lightbox` — full-screen photo viewer shared by `/images` and the home strip.
 - Icons: existing hand-rolled SVG set in `src/components/icons/`.
 

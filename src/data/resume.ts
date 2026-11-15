@@ -217,6 +217,7 @@ export const languages: Language[] = [
     lang: 'ja',
   },
   { name: 'French', level: 'Elementary', greeting: 'Bonjour', lang: 'fr' },
+  { name: 'Russian', level: 'Elementary', greeting: 'Привет', lang: 'ru' },
 ];
 
 export const skills: string[] = [

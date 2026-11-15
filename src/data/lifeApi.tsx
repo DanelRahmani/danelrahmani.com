@@ -31,7 +31,7 @@ export const About = (
   </>
 );
 
-export const AboutExtended = `I run Axiom Digital, study International Business at the University of Groningen, and grew up in my family's tailoring atelier. This site is where those threads meet: my work, my writing, and the photos I take along the way.`;
+export const AboutExtended = `I study International Business at the University of Groningen, founded Axiom Digital, and grew up in my family's tailoring atelier. This site is where those threads meet: my work, my writing, and the photos I take along the way.`;
 
 export const AxiomDigital = {
   name: 'Axiom Digital',

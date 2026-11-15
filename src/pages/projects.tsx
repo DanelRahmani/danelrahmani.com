@@ -54,8 +54,8 @@ export default function Creating() {
         }}
       />
       <PageLayout
-        title="Things I've made during my life"
-        intro="A list of projects I've worked on, I'm working on and I will work on."
+        title="Things I have built"
+        intro="Finance and economics first, then the languages, tools and businesses around them."
       >
         <LayoutGroup>
           <ProjectFilter value={filter} onChange={setFilter} />

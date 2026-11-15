@@ -13,6 +13,10 @@ import { SocialLink } from '../components/SocialLink';
 import { Seam, StitchUnderline } from '../components/Stitch';
 import { MagneticButton } from '../components/motion/MagneticButton';
 import { SpotlightCard } from '../components/motion/SpotlightCard';
+import { Closing } from '../components/home/Closing';
+import { SelectedWork } from '../components/home/SelectedWork';
+import { ThreadSoFar } from '../components/home/ThreadSoFar';
+import { TokyoClock } from '../components/home/TokyoClock';
 import { NotePreview } from '../components/notes/NotePreview';
 import { About, AxiomDigital, Name, SocialMedia } from '../data/lifeApi';
 import { Note, notesApi } from '../lib/notesApi';
@@ -27,9 +31,13 @@ const heroEnter = (delay: number) => ({
   transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
+// The hero keeps the two professional profiles; the personal feeds live on
+// the About page.
+const HeroProfiles = SocialMedia.filter((entry) => ['LinkedIn', 'Github'].includes(entry.name));
+
 const seoTitle = 'Danel Rahmani';
 const seoDescription =
-  'International Business student at the University of Groningen, on exchange at Waseda University in Tokyo. Founder of Axiom Digital.';
+  'International Business student at the University of Groningen, on exchange at Waseda University in Tokyo. Looking for a summer 2027 internship in corporate finance, M&A or asset management.';
 
 type Props = {
   latestNotes: Note[];
@@ -99,7 +107,7 @@ export default function Home({ latestNotes }: Props) {
             {...heroEnter(0.2)}
             className="mt-4 font-mono text-xs text-stone-600 dark:text-stone-400"
           >
-            Based in Groningen. Willing to relocate.
+            <TokyoClock /> Based in Groningen. Willing to relocate.
           </motion.p>
           <motion.div
             {...heroEnter(0.25)}
@@ -110,6 +118,9 @@ export default function Home({ latestNotes }: Props) {
                 Résumé
               </Button>
             </MagneticButton>
+            <Button as="a" variant="secondary" href="#contact">
+              Get in touch
+            </Button>
             <Button
               as="a"
               variant="secondary"
@@ -120,10 +131,10 @@ export default function Home({ latestNotes }: Props) {
               Axiom Digital
             </Button>
             <ul role="list" className="flex gap-6">
-              {SocialMedia.map((socialProfile) => (
+              {HeroProfiles.map((socialProfile) => (
                 <SocialLink
                   key={socialProfile.name}
-                  aria-label={`Follow on ${socialProfile.name}`}
+                  aria-label={`${socialProfile.name} profile`}
                   href={socialProfile.link}
                   icon={socialProfile.icon}
                 />
@@ -133,7 +144,13 @@ export default function Home({ latestNotes }: Props) {
         </div>
       </Container>
       <Photos />
-      <Container className="mt-16">
+      <Container className="mt-20">
+        <ThreadSoFar />
+      </Container>
+      <Container className="mt-24">
+        <SelectedWork />
+      </Container>
+      <Container className="mt-12">
         <SpotlightCard>
           <div className="flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-5 sm:items-center">
@@ -201,6 +218,9 @@ export default function Home({ latestNotes }: Props) {
             </Link>
           </div>
         </div>
+      </Container>
+      <Container className="mt-24">
+        <Closing />
       </Container>
     </>
   );
