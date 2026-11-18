@@ -65,17 +65,25 @@ const BlockTypeTransformLookup: Record<
   table_row: noop,
   embed: noop,
   bookmark: noop,
+  // Measures the image and makes a blurred placeholder. If the image cannot
+  // be fetched or decoded (an expired link, HEIC, an SVG, a site that blocks
+  // downloads), the block is kept without them and rendered as a plain
+  // image, so one bad picture never takes the whole note down.
   image: async (block: any) => {
     const contents = block[block.type];
-    const buffer = await fetch(contents[contents.type].url).then(async (res) =>
-      Buffer.from(await res.arrayBuffer()),
-    );
-    const {
-      base64,
-      metadata: { height, width },
-    } = await getPlaiceholder(buffer, { size: 64 });
-    block.image['size'] = { height, width };
-    block.image['placeholder'] = base64;
+    try {
+      const res = await fetch(contents[contents.type].url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const buffer = Buffer.from(await res.arrayBuffer());
+      const {
+        base64,
+        metadata: { height, width },
+      } = await getPlaiceholder(buffer, { size: 64 });
+      block.image['size'] = { height, width };
+      block.image['placeholder'] = base64;
+    } catch (error) {
+      console.warn(`Notion image ${block.id}: no placeholder (${(error as Error).message})`);
+    }
 
     return block;
   },

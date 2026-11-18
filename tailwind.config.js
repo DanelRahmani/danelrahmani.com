@@ -50,9 +50,11 @@ module.exports = {
           css: {
             color: theme('colors.gray.700'),
             a: {
-              color: theme('colors.blue.500'),
-              '&:hover': { color: theme('colors.blue.700') },
-              code: { color: theme('colors.blue.400') },
+              color: '#4A0E0E',
+              textDecorationColor: 'rgba(74,14,14,0.35)',
+              textUnderlineOffset: '3px',
+              '&:hover': { color: '#6B1515', textDecorationColor: '#6B1515' },
+              code: { color: '#4A0E0E' },
             },
             'h2,h3,h4': { 'scroll-margin-top': spacing[32] },
             thead: { borderBottomColor: theme('colors.gray.200') },

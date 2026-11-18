@@ -1,9 +1,10 @@
 import { TextRichTextItemResponse } from '@notionhq/client/build/src/api-endpoints';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { Quote } from '../Quote';
+import { NotionImage } from './NotionImage';
+import { NotionTable } from './NotionTable';
 
 //TODO: improve types here, cleanup the code
 type Props = {
@@ -89,21 +90,10 @@ export const NotionBlockRenderer = ({ block }: Props) => {
     case 'child_page':
       return <p>{value.title}</p>;
     case 'image':
-      const src = value.type === 'external' ? value.external.url : value.file.url;
-      const caption = value.caption ? value.caption[0]?.plain_text : '';
+      return <NotionImage value={value} />;
+    case 'table':
       return (
-        <figure>
-          <Image
-            className="object-cover"
-            placeholder="blur"
-            src={src}
-            alt={caption}
-            blurDataURL={value.placeholder}
-            width={value.size.width}
-            height={value.size.height}
-          />
-          {caption && <figcaption>{caption}</figcaption>}
-        </figure>
+        <NotionTable value={value} renderText={(items) => <NotionText textItems={items} />} />
       );
     case 'divider':
       return <hr key={id} />;
@@ -152,14 +142,13 @@ const NotionText = ({ textItems }: { textItems: TextRichTextItemResponse[] }) =>
 
   return (
     <>
-      {textItems.map((textItem) => {
-        const {
-          annotations: { bold, code, color, italic, strikethrough, underline },
-          text,
-        } = textItem;
+      {textItems.map((textItem: any, index) => {
+        const { bold, code, color, italic, strikethrough, underline } = textItem.annotations ?? {};
+        const content: string = textItem.text?.content ?? textItem.plain_text ?? '';
+        const href: string | undefined = textItem.text?.link?.url ?? textItem.href ?? undefined;
         return (
           <span
-            key={text.content}
+            key={index}
             className={clsx({
               'font-bold': bold,
               'font-mono font-semibold bg-zinc-600 text-zinc-200 px-1 py-0.5 m-1 rounded-md': code,
@@ -167,9 +156,9 @@ const NotionText = ({ textItems }: { textItems: TextRichTextItemResponse[] }) =>
               'line-through': strikethrough,
               underline: underline,
             })}
-            style={color !== 'default' ? { color } : {}}
+            style={color && color !== 'default' ? { color } : {}}
           >
-            {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
+            {href ? <a href={href}>{content}</a> : content}
           </span>
         );
       })}
