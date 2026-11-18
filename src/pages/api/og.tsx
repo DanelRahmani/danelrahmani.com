@@ -15,10 +15,6 @@ const displayItalicFont = fetch(
 const bodyFont = fetch(new URL('../../../public/assets/font/Inter.ttf', import.meta.url)).then(
   (res) => res.arrayBuffer(),
 );
-// The site's portrait (Tokyo Skytree behind), downsized to 600px for the card.
-const portrait = fetch(new URL('../../../public/assets/og-portrait.jpg', import.meta.url)).then(
-  (res) => res.arrayBuffer(),
-);
 
 const CREME = '#FDFBF6';
 const INK = '#1C1917';
@@ -40,13 +36,16 @@ const Stitch = ({ count }: { count: number }) => (
 );
 
 const generateImage = async (req: NextRequest) => {
-  const [display, displayItalic, body, photo] = await Promise.all([
+  const [display, displayItalic, body] = await Promise.all([
     displayFont,
     displayItalicFont,
     bodyFont,
-    portrait,
   ]);
   const { searchParams } = req.nextUrl;
+  // The portrait (Tokyo Skytree behind) is loaded by URL from the site's own
+  // public folder, not bundled: edge functions have a 1 MB size limit on
+  // Vercel's Hobby plan, and the fonts already use most of it.
+  const photo = new URL('/assets/og-portrait.jpg', req.nextUrl.origin).toString();
   const title = searchParams.get('title') ?? 'Danel Rahmani';
   const rawDescription = searchParams.get('description');
   // Keep the card calm: long titles step down a size, long descriptions are cut.
@@ -96,7 +95,7 @@ const generateImage = async (req: NextRequest) => {
           {/* satori renders this card; next/image does not apply here */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={photo as unknown as string}
+            src={photo}
             width={300}
             height={300}
             tw="rounded-3xl"
