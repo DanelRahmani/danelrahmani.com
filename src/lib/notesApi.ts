@@ -2,6 +2,7 @@
 import { Client, isFullPage } from '@notionhq/client';
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { compareAsc, compareDesc } from 'date-fns';
+import { createHash } from 'crypto';
 import { getPlaiceholder } from 'plaiceholder';
 
 const notion = new Client({
@@ -128,6 +129,24 @@ const resolveCoverImage = (page: any): string | null => {
   return null;
 };
 
+/**
+ * A short fingerprint of WHICH image a note uses, not of its signed link:
+ * Notion re-signs the same upload with a new query string every hour, but
+ * the path (the file's id and name) only changes when the image does. The
+ * thumbnail route caches by this fingerprint for a year, so a picture is
+ * fetched from Notion once, and replacing it gives it a new address.
+ */
+export const imageFingerprint = (source: string) => {
+  let stable = source;
+  try {
+    const url = new URL(source);
+    stable = url.hostname.endsWith('amazonaws.com') ? url.origin + url.pathname : source;
+  } catch {
+    // not a URL: fingerprint the raw value
+  }
+  return createHash('sha256').update(stable).digest('hex').slice(0, 12);
+};
+
 class NotesApi {
   constructor(
     private readonly notion: Client,
@@ -144,12 +163,15 @@ class NotesApi {
       .slice(0, limit);
 
     return Promise.all(
-      sorted.map(async (note) => ({
-        ...note,
-        thumbnail: (await this.findThumbnailSource(note))
-          ? `/api/notes/${encodeURIComponent(note.slug)}/thumbnail`
-          : null,
-      })),
+      sorted.map(async (note) => {
+        const source = await this.findThumbnailSource(note);
+        return {
+          ...note,
+          thumbnail: source
+            ? `/api/notes/${encodeURIComponent(note.slug)}/thumbnail?v=${imageFingerprint(source)}`
+            : null,
+        };
+      }),
     );
   }
 

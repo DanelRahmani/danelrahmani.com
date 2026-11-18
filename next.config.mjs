@@ -5,6 +5,12 @@ const config = {
   },
   transpilePackages: ["geist"],
   images: {
+    // Local images may not carry a query string unless allowed here. Note
+    // thumbnails do (?v=<image fingerprint>); everything else stays plain.
+    localPatterns: [
+      { pathname: '/api/notes/**' },
+      { pathname: '/**', search: '' },
+    ],
     remotePatterns: [
       // Files uploaded into Notion are served from signed S3 URLs. The bucket
       // host is `prod-files-secure.s3.<region>.amazonaws.com`, which does not
