@@ -15,12 +15,16 @@ type Props = {
 };
 
 export default function Note({
-  note: { title, description, createdAt, slug, coverImage },
+  note: { title, description, createdAt, slug, coverImage, thumbnail },
   noteContent,
   previousPathname,
 }: Props & { previousPathname: string }) {
   const url = `${process.env.NEXT_PUBLIC_URL}/notes/${slug}`;
-  const openGraphImageUrl = buildOpenGraphUrl({ title, description });
+  // A note with a picture is shared with that picture; one without gets the
+  // generated title card.
+  const openGraphImageUrl = thumbnail
+    ? `${process.env.NEXT_PUBLIC_URL}${thumbnail}`
+    : buildOpenGraphUrl({ title, description });
 
   useEffect(() => {
     Prism.highlightAll();
@@ -33,7 +37,8 @@ export default function Note({
         description={description}
         canonical={url}
         openGraph={{
-          images: [{ url: openGraphImageUrl }],
+          type: 'article',
+          images: [{ url: openGraphImageUrl, alt: title }],
         }}
       />
       <ArticleJsonLd

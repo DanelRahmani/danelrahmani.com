@@ -18,6 +18,12 @@ export type Note = {
   description: string;
   slug: string;
   isPublished: boolean;
+  /**
+   * Stable address of the note's thumbnail (its cover, else its first image),
+   * or null. Notion's own image links expire after about an hour, so lists and
+   * share previews use this route, which fetches a fresh copy each time.
+   */
+  thumbnail?: string | null;
   publishedAt: string;
   inProgress: boolean;
 };
@@ -131,12 +137,44 @@ class NotesApi {
   async getNotes(sortOrder: 'asc' | 'desc' = 'desc', limit?: number) {
     const notes = await this.getDatabaseContent(this.databaseId);
 
-    return notes
+    const sorted = notes
       .sort((a, b) => {
         return CompareFunctionLookup[sortOrder](new Date(a.publishedAt), new Date(b.publishedAt));
       })
       .slice(0, limit);
+
+    return Promise.all(
+      sorted.map(async (note) => ({
+        ...note,
+        thumbnail: (await this.findThumbnailSource(note))
+          ? `/api/notes/${encodeURIComponent(note.slug)}/thumbnail`
+          : null,
+      })),
+    );
   }
+
+  /** A fresh (signed) URL for the note's thumbnail image, or null if it has none. */
+  async getThumbnailSource(slug: string): Promise<string | null> {
+    const notes = await this.getDatabaseContent(this.databaseId);
+    const note = notes.find((entry) => entry.slug === slug);
+    return note ? this.findThumbnailSource(note) : null;
+  }
+
+  // The cover wins; otherwise the first image block at the top level of the
+  // page. Never throws: a note without a thumbnail just shows without one.
+  private findThumbnailSource = async (note: Note): Promise<string | null> => {
+    if (note.coverImage) return note.coverImage;
+    try {
+      const { results } = await this.notion.blocks.children.list({
+        block_id: note.id,
+        page_size: 100,
+      });
+      const image: any = results.find((block: any) => block.type === 'image');
+      return image ? image.image[image.image.type]?.url ?? null : null;
+    } catch {
+      return null;
+    }
+  };
 
   async getNotesByTag(tag: string, sortOrder: 'asc' | 'desc' = 'desc', limit?: number) {
     const notes = await notesApi.getNotes(sortOrder, limit);
