@@ -71,7 +71,7 @@ export default function AboutMe() {
               </ul>
               <Link
                 href="/resume"
-                className="inline-flex items-center rounded-md px-3 py-1 text-sm font-medium text-white bg-primary hover:bg-primary-light dark:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition"
+                className="inline-flex items-center rounded-full px-4 py-1 text-sm font-semibold text-white bg-primary hover:bg-primary-light dark:bg-dark-accent dark:hover:bg-dark-accent-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary dark:focus-visible:ring-dark-accent transition"
               >
                 Résumé
               </Link>
@@ -79,14 +79,27 @@ export default function AboutMe() {
             <Section>
               <Section.Title as="h2">Now</Section.Title>
               <Section.Content>
+                I am looking for a summer 2027 internship in corporate finance, M&amp;A or asset
+                management. I am based in Groningen, in Tokyo until March, and willing to relocate.
+                My{' '}
+                <Link
+                  href="/resume"
+                  className="underline decoration-primary/40 underline-offset-2 transition hover:decoration-primary dark:decoration-dark-accent/50 dark:hover:decoration-dark-accent"
+                >
+                  résumé
+                </Link>{' '}
+                has the details, and the fastest way to reach me is{' '}
+                <ExternalLink href="mailto:danelrahmani@outlook.com">email</ExternalLink>.
+              </Section.Content>
+            </Section>
+            <Section>
+              <Section.Title as="h2">Axiom Digital</Section.Title>
+              <Section.Content>
                 In July 2026 I founded{' '}
-                <ExternalLink href="https://axiomdigital.nl">Axiom Digital</ExternalLink>, a digital
-                agency focused on AI integration and digital transformation. I help businesses work
-                out where AI and automation actually pay off, then build and deliver it. If that
-                sounds useful to you,{' '}
-                <ExternalLink href="https://axiomdigital.nl">work with me</ExternalLink>. I am also
-                looking for a summer 2027 internship in corporate finance, M&amp;A or asset
-                management. I am based in Groningen and willing to relocate.
+                <ExternalLink href="https://axiomdigital.nl">Axiom Digital</ExternalLink>, a
+                consultancy for small businesses. I help owners work out where AI and automation
+                actually pay off, then build and deliver it. If that sounds useful to you,{' '}
+                <ExternalLink href="https://axiomdigital.nl">work with me</ExternalLink>.
               </Section.Content>
             </Section>
             <Section>

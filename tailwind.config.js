@@ -40,6 +40,9 @@ module.exports = {
         'dark-bg': '#0F090E',
         'dark-accent': '#D43D55',
         'dark-accent-hover': '#E8566A',
+        // Hover fill for raspberry buttons: deeper, not lighter, so white
+        // labels keep 5.4:1 contrast (on #E8566A they drop to 3.5:1).
+        'dark-accent-deep': '#C2334B',
         'dark-muted': '#9CA3AF',
       },
       borderRadius: {

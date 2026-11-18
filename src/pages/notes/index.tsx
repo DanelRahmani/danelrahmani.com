@@ -28,8 +28,8 @@ export default function Notes({ notes, tags }: Props) {
         }}
       />
       <PageLayout
-        title="My Notes on various topics"
-        intro="All of my thoughts on business, finance, the economy, technology, politics and much more"
+        title="Notes"
+        intro="Short pieces on finance, economics and the things I build, written while I study them."
       >
         <h2 className="font-serif text-2xl font-semibold tracking-tight text-stone-900 dark:text-zinc-100">
           Tags

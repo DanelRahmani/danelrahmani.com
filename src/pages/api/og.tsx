@@ -15,6 +15,10 @@ const displayItalicFont = fetch(
 const bodyFont = fetch(new URL('../../../public/assets/font/Inter.ttf', import.meta.url)).then(
   (res) => res.arrayBuffer(),
 );
+// The site's portrait (Tokyo Skytree behind), downsized to 600px for the card.
+const portrait = fetch(new URL('../../../public/assets/og-portrait.jpg', import.meta.url)).then(
+  (res) => res.arrayBuffer(),
+);
 
 const CREME = '#FDFBF6';
 const INK = '#1C1917';
@@ -36,14 +40,21 @@ const Stitch = ({ count }: { count: number }) => (
 );
 
 const generateImage = async (req: NextRequest) => {
-  const [display, displayItalic, body] = await Promise.all([
+  const [display, displayItalic, body, photo] = await Promise.all([
     displayFont,
     displayItalicFont,
     bodyFont,
+    portrait,
   ]);
   const { searchParams } = req.nextUrl;
   const title = searchParams.get('title') ?? 'Danel Rahmani';
-  const description = searchParams.get('description');
+  const rawDescription = searchParams.get('description');
+  // Keep the card calm: long titles step down a size, long descriptions are cut.
+  const titleSize = title.length > 32 ? 'text-5xl' : title.length > 16 ? 'text-6xl' : 'text-7xl';
+  const description =
+    rawDescription && rawDescription.length > 150
+      ? `${rawDescription.slice(0, 148).replace(/\s+\S*$/, '')}...`
+      : rawDescription;
 
   return new ImageResponse(
     (
@@ -62,24 +73,36 @@ const generateImage = async (req: NextRequest) => {
             danelrahmani.com
           </div>
         </div>
-        <div tw="mt-auto flex w-full flex-col">
-          <h1
-            tw="max-w-4xl text-7xl leading-tight"
-            style={{ fontFamily: 'Bodoni Moda', color: INK }}
-          >
-            {title}
-          </h1>
-          {description && (
-            <h2 tw="mt-2 max-w-3xl text-3xl leading-snug" style={{ color: STONE }}>
-              {description}
-            </h2>
-          )}
-          <div tw="mt-10 flex flex-col">
-            <Stitch count={16} />
-            <div tw="mt-6 text-2xl" style={{ color: MAROON }}>
-              Danel Rahmani, founder of Axiom Digital
+        <div tw="mt-auto flex w-full items-end">
+          <div tw="flex flex-1 flex-col pr-14">
+            <h1
+              tw={`${titleSize} leading-tight`}
+              style={{ fontFamily: 'Bodoni Moda', color: INK }}
+            >
+              {title}
+            </h1>
+            {description && (
+              <h2 tw="mt-4 text-[28px] leading-snug" style={{ color: STONE }}>
+                {description}
+              </h2>
+            )}
+            <div tw="mt-10 flex flex-col">
+              <Stitch count={11} />
+              <div tw="mt-6 text-2xl" style={{ color: MAROON }}>
+                Danel Rahmani, Groningen and Waseda
+              </div>
             </div>
           </div>
+          {/* satori renders this card; next/image does not apply here */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={photo as unknown as string}
+            width={300}
+            height={300}
+            tw="rounded-3xl"
+            style={{ objectFit: 'cover', boxShadow: '0 12px 28px -12px rgba(74,14,14,0.35)' }}
+            alt=""
+          />
         </div>
       </main>
     ),

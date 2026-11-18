@@ -3,7 +3,7 @@ import React, { ComponentPropsWithRef, ElementType, forwardRef } from 'react';
 
 const variantStyles = {
   primary:
-    'bg-primary font-semibold text-white hover:bg-primary-light active:scale-[0.98] dark:bg-dark-accent dark:hover:bg-dark-accent-hover',
+    'bg-primary font-semibold text-white hover:bg-primary-light active:scale-[0.98] dark:bg-dark-accent dark:hover:bg-dark-accent-deep',
   secondary:
     'bg-primary/[0.06] font-medium text-primary hover:bg-primary/10 active:scale-[0.98] dark:bg-dark-accent/10 dark:text-dark-accent-hover dark:hover:bg-dark-accent/20',
 } as const;
